@@ -1,11 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <item name="android:statusBarColor">@color/background_blue</item>
-        <item name="android:colorPrimary">@color/background_blue</item>
-        <item name="android:backgroundStacked">@color/background_blue</item>
+    <style name="AppTheme" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">#3F51B5</item>
+        <item name="android:colorPrimaryDark">#303F9F</item>
     </style>
+
+
 
     <style name="TimeLabelTextAppearance" parent="@android:style/TextAppearance.Material">
         <item name="android:textColor">@android:color/white</item>
@@ -33,9 +34,5 @@
         <item name="android:colorAccent">@color/hot_pink</item>
     </style>
 
-
-    <style name="KitKatTheme" parent="AppTheme">
-        <item name="undoBarStyle">@style/UndoBarKitKatStyle</item>
-    </style>
 
 </resources>

@@ -62,6 +62,16 @@ class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
                 new UpdateTask().execute(item);
             }
         });
+
+        nameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddAlarmDialogFragment addAlarm = new AddAlarmDialogFragment();
+                //todo
+//                addAlarm.alarms = AlarmsFragment.this;
+//                addAlarm.show(getActivity().getSupportFragmentManager(), "add_alarm");
+            }
+        });
     }
 
     private class UpdateTask extends AsyncTask<Alarm, Void, Void> {

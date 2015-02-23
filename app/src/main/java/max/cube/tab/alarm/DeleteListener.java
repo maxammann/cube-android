@@ -48,7 +48,8 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
 
                     UndoBarController.UndoBar undoBar = new UndoBarController.UndoBar(activity);
 
-                    undoBar.message("Undo").listener(new UndoBarController.UndoListener() {
+                    String name = alarm.getName();
+                    undoBar.message((name == null || name.isEmpty() ? "Alarm" : name) + " deleted").listener(new UndoBarController.UndoListener() {
                         @Override
                         public void onUndo(@Nullable Parcelable parcelable) {
                             Alarm last = deleted.pollLast();

@@ -22,6 +22,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 
 import max.cube.dao.AlarmDao;
 import max.cube.dao.DaoMaster;
@@ -51,44 +52,48 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "alarms", null);
         db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
         AlarmDao alarmDao = daoSession.getAlarmDao();
 
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+//        setSupportActionBar(toolbar);
+
 
         mTabsPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager(), alarmDao);
-        final ActionBar actionBar = getActionBar();
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+//        getActionBar().hide();
+//
+//        if (actionBar == null) {
+//            throw new RuntimeException("Nope.");
+//        }
 
-        if (actionBar == null) {
-            throw new RuntimeException("Nope.");
-        }
-
-        actionBar.setHomeButtonEnabled(false);
+//        actionBar.setHomeButtonEnabled(false);
 
 
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mTabsPagerAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
+//        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                actionBar.setSelectedNavigationItem(position);
+//            }
+//        });
+//
+//        for (int i = 0; i < mTabsPagerAdapter.getCount(); i++) {
+//            actionBar.addTab(
+//                    actionBar.newTab()
+//                            .setText(mTabsPagerAdapter.getPageTitle(i))
+//                            .setTabListener(this));
+//        }
 
-        for (int i = 0; i < mTabsPagerAdapter.getCount(); i++) {
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mTabsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
-        }
-
-        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     @Override

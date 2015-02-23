@@ -9,7 +9,6 @@ import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -20,11 +19,10 @@ import max.cube.R;
 import max.cube.dao.Alarm;
 
 
-public class AddAlarmFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class AddAlarmDialogFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
     private View dialogView;
 
-    ViewGroup root;
     AlarmPopulator alarms;
 
 
@@ -50,6 +48,8 @@ public class AddAlarmFragment extends DialogFragment implements TimePickerDialog
         LayoutInflater inflater = LayoutInflater.from(themeContext);
         dialogView = inflater.inflate(R.layout.custom_picker_dialog, null);
         timePicker.setView(dialogView);
+
+        EditText nameView = (EditText) this.dialogView.findViewById(R.id.alarm_name);
 
         return timePicker;
     }

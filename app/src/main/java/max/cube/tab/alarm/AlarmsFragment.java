@@ -32,9 +32,8 @@ public class AlarmsFragment extends Fragment implements AlarmPopulator {
         root.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddAlarmFragment addAlarm = new AddAlarmFragment();
+                AddAlarmDialogFragment addAlarm = new AddAlarmDialogFragment();
                 addAlarm.alarms = AlarmsFragment.this;
-                addAlarm.root = root;
                 addAlarm.show(getActivity().getSupportFragmentManager(), "add_alarm");
             }
         });
