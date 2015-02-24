@@ -9,8 +9,6 @@ import android.widget.AdapterView;
 
 import com.cocosw.undobar.UndoBarController;
 
-import java.util.LinkedList;
-
 import max.cube.AlarmPopulator;
 import max.cube.dao.Alarm;
 import max.cube.dao.AlarmDao;
@@ -19,7 +17,7 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
     private final AlarmDao alarmDao;
     private final AlarmPopulator populator;
     private final Activity activity;
-    private LinkedList<Alarm> deleted = new LinkedList<>();
+
 
     public DeleteListener(AlarmDao alarmDao, AlarmPopulator populator, Activity activity) {
         this.alarmDao = alarmDao;
@@ -42,28 +40,14 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
                 }
 
                 @Override
-                protected void onPostExecute(Alarm alarm) {
-                    deleted.push(alarm);
+                protected void onPostExecute(final Alarm alarm) {
                     populator.populateView();
 
-                    UndoBarController.UndoBar undoBar = new UndoBarController.UndoBar(activity);
-
                     String name = alarm.getName();
-                    undoBar.message((name == null || name.isEmpty() ? "Alarm" : name) + " deleted").listener(new UndoBarController.UndoListener() {
-                        @Override
-                        public void onUndo(@Nullable Parcelable parcelable) {
-                            Alarm last = deleted.pollLast();
 
-                            if (last == null) {
-                                return;
-                            }
-
-                            populator.push(last);
-                            populator.populateView();
-
-                        }
-                    });
-                    undoBar.show();
+                    new UndoBarController.UndoBar(activity).token(new AlarmParcelable(alarm))
+                            .message((name == null || name.isEmpty() ? "Alarm" : name) + " deleted").listener(new UndoListener())
+                            .show();
                 }
             };
 
@@ -73,5 +57,16 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
         }
 
         return false;
+    }
+
+    private class UndoListener implements UndoBarController.UndoListener {
+        @Override
+        public void onUndo(@Nullable Parcelable parcelable) {
+
+            if (parcelable instanceof AlarmParcelable) {
+                populator.push(((AlarmParcelable) parcelable).getAlarm());
+                populator.populateView();
+            }
+        }
     }
 }

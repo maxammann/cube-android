@@ -1,30 +1,20 @@
 package max.cube.tab.alarm;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 import max.cube.AlarmPopulator;
 import max.cube.R;
-import max.cube.dao.Alarm;
 
 
-public class AddAlarmDialogFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-
-    private View dialogView;
+public class AddAlarmDialogFragment extends DialogFragment {
 
     AlarmPopulator alarms;
-
 
     @NonNull
     @Override
@@ -36,35 +26,28 @@ public class AddAlarmDialogFragment extends DialogFragment implements TimePicker
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
 
-        TimePickerDialog timePicker = new TimePickerDialog(
+        OnTimerSetListener callBack = new OnTimerSetListener(alarms);
+
+        boolean h24 = DateFormat.is24HourFormat(getActivity());
+
+
+
+        CustomTimePickerDialog timePicker = new CustomTimePickerDialog(
                 getActivity(),
                 R.style.TimePickerTheme,
-                this,
-                hour, minute,
-                DateFormat.is24HourFormat(getActivity())
+                callBack,
+                R.layout.custom_picker_dialog,
+                R.id.timePicker,
+                hour,
+                minute,
+              h24
+
         );
 
-        Context themeContext = timePicker.getContext();
-        LayoutInflater inflater = LayoutInflater.from(themeContext);
-        dialogView = inflater.inflate(R.layout.custom_picker_dialog, null);
-        timePicker.setView(dialogView);
-
-        EditText nameView = (EditText) this.dialogView.findViewById(R.id.alarm_name);
+        callBack.setDialogView(timePicker.getView());
 
         return timePicker;
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Alarm alarm = new Alarm();
-        EditText nameView = (EditText) this.dialogView.findViewById(R.id.alarm_name);
-        String name = nameView.getText().toString();
 
-        alarm.setName(name);
-
-        alarm.setWake(minute * 60 + hourOfDay * 60 * 60);
-
-        alarms.push(alarm);
-        alarms.populateView();
-    }
 }
