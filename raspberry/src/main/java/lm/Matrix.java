@@ -3,6 +3,7 @@ package lm;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +29,10 @@ public class Matrix {
 //    }
 
     public Matrix(String host, int port) throws IOException {
+        this(new Socket(host, port).getOutputStream());
+    }
+
+    public Matrix(InetAddress host, int port) throws IOException {
         this(new Socket(host, port).getOutputStream());
     }
 
@@ -78,6 +83,16 @@ public class Matrix {
         sendRequest(Request.newBuilder().setType(Request.Type.PAUSE).build());
     }
 
+    public void setAlarms(Iterable<Lm.Alarm> alarms) throws IOException {
+        Request.Builder alarmRequest = Request.newBuilder().setType(Request.Type.ALARM_REQUST);
+        Lm.Alarms.Builder alarmsContainer = Lm.Alarms.newBuilder();
+
+        alarmsContainer.addAllAlarms(alarms);
+
+        Request.Builder setAlarms = alarmRequest.setAlarmRequest(Lm.AlarmRequest.newBuilder().setType(Lm.AlarmRequest.Type.SET_ALARMS).setAlarms(alarmsContainer));
+        sendRequest(setAlarms.build());
+    }
+
     private void sendRequest(Request request) throws IOException {
         byte[] bytes = request.toByteArray();
 
@@ -87,9 +102,6 @@ public class Matrix {
         buffer.order(ByteOrder.BIG_ENDIAN);
 
         buffer.putInt(bytes.length);
-
-        System.out.println(bytes.length);
-
 
         os.write(buffer.array());
 

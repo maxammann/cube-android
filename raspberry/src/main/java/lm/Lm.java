@@ -137,6 +137,19 @@ public final class Lm {
      * <code>optional .lm.SetScreen setscreen = 10;</code>
      */
     lm.Lm.SetScreenOrBuilder getSetscreenOrBuilder();
+
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    boolean hasAlarmRequest();
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    lm.Lm.AlarmRequest getAlarmRequest();
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    lm.Lm.AlarmRequestOrBuilder getAlarmRequestOrBuilder();
   }
   /**
    * Protobuf type {@code lm.Request}
@@ -318,6 +331,19 @@ public final class Lm {
               bitField0_ |= 0x00000200;
               break;
             }
+            case 90: {
+              lm.Lm.AlarmRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                subBuilder = alarmRequest_.toBuilder();
+              }
+              alarmRequest_ = input.readMessage(lm.Lm.AlarmRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(alarmRequest_);
+                alarmRequest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000400;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -399,21 +425,25 @@ public final class Lm {
        */
       SETSCREEN(8, 9),
       /**
+       * <code>ALARM_REQUST = 10;</code>
+       */
+      ALARM_REQUST(9, 10),
+      /**
        * <code>SWAPBUFFERS = 32;</code>
        */
-      SWAPBUFFERS(9, 32),
+      SWAPBUFFERS(10, 32),
       /**
        * <code>PAUSE = 33;</code>
        */
-      PAUSE(10, 33),
+      PAUSE(11, 33),
       /**
        * <code>UNPAUSE = 34;</code>
        */
-      UNPAUSE(11, 34),
+      UNPAUSE(12, 34),
       /**
        * <code>CLEAR = 36;</code>
        */
-      CLEAR(12, 36),
+      CLEAR(13, 36),
       ;
 
       /**
@@ -453,6 +483,10 @@ public final class Lm {
        */
       public static final int SETSCREEN_VALUE = 9;
       /**
+       * <code>ALARM_REQUST = 10;</code>
+       */
+      public static final int ALARM_REQUST_VALUE = 10;
+      /**
        * <code>SWAPBUFFERS = 32;</code>
        */
       public static final int SWAPBUFFERS_VALUE = 32;
@@ -483,6 +517,7 @@ public final class Lm {
           case 7: return POPULATESTRING;
           case 8: return RENDERSTRING;
           case 9: return SETSCREEN;
+          case 10: return ALARM_REQUST;
           case 32: return SWAPBUFFERS;
           case 33: return PAUSE;
           case 34: return UNPAUSE;
@@ -743,6 +778,27 @@ public final class Lm {
       return setscreen_;
     }
 
+    public static final int ALARM_REQUEST_FIELD_NUMBER = 11;
+    private lm.Lm.AlarmRequest alarmRequest_;
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    public boolean hasAlarmRequest() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    public lm.Lm.AlarmRequest getAlarmRequest() {
+      return alarmRequest_;
+    }
+    /**
+     * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+     */
+    public lm.Lm.AlarmRequestOrBuilder getAlarmRequestOrBuilder() {
+      return alarmRequest_;
+    }
+
     private void initFields() {
       type_ = lm.Lm.Request.Type.SETPIXEL;
       setpixel_ = lm.Lm.SetPixel.getDefaultInstance();
@@ -754,6 +810,7 @@ public final class Lm {
       populatestring_ = lm.Lm.PopulateString.getDefaultInstance();
       renderstring_ = lm.Lm.RenderString.getDefaultInstance();
       setscreen_ = lm.Lm.SetScreen.getDefaultInstance();
+      alarmRequest_ = lm.Lm.AlarmRequest.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -819,6 +876,12 @@ public final class Lm {
           return false;
         }
       }
+      if (hasAlarmRequest()) {
+        if (!getAlarmRequest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -855,6 +918,9 @@ public final class Lm {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeMessage(10, setscreen_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(11, alarmRequest_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -904,6 +970,10 @@ public final class Lm {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, setscreen_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, alarmRequest_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1023,6 +1093,7 @@ public final class Lm {
           getPopulatestringFieldBuilder();
           getRenderstringFieldBuilder();
           getSetscreenFieldBuilder();
+          getAlarmRequestFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1087,6 +1158,12 @@ public final class Lm {
           setscreenBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000200);
+        if (alarmRequestBuilder_ == null) {
+          alarmRequest_ = lm.Lm.AlarmRequest.getDefaultInstance();
+        } else {
+          alarmRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1191,6 +1268,14 @@ public final class Lm {
         } else {
           result.setscreen_ = setscreenBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        if (alarmRequestBuilder_ == null) {
+          result.alarmRequest_ = alarmRequest_;
+        } else {
+          result.alarmRequest_ = alarmRequestBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1236,6 +1321,9 @@ public final class Lm {
         }
         if (other.hasSetscreen()) {
           mergeSetscreen(other.getSetscreen());
+        }
+        if (other.hasAlarmRequest()) {
+          mergeAlarmRequest(other.getAlarmRequest());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1296,6 +1384,12 @@ public final class Lm {
         }
         if (hasSetscreen()) {
           if (!getSetscreen().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasAlarmRequest()) {
+          if (!getAlarmRequest().isInitialized()) {
             
             return false;
           }
@@ -2399,6 +2493,122 @@ public final class Lm {
           setscreen_ = null;
         }
         return setscreenBuilder_;
+      }
+
+      private lm.Lm.AlarmRequest alarmRequest_ = lm.Lm.AlarmRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          lm.Lm.AlarmRequest, lm.Lm.AlarmRequest.Builder, lm.Lm.AlarmRequestOrBuilder> alarmRequestBuilder_;
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public boolean hasAlarmRequest() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public lm.Lm.AlarmRequest getAlarmRequest() {
+        if (alarmRequestBuilder_ == null) {
+          return alarmRequest_;
+        } else {
+          return alarmRequestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public Builder setAlarmRequest(lm.Lm.AlarmRequest value) {
+        if (alarmRequestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          alarmRequest_ = value;
+          onChanged();
+        } else {
+          alarmRequestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public Builder setAlarmRequest(
+          lm.Lm.AlarmRequest.Builder builderForValue) {
+        if (alarmRequestBuilder_ == null) {
+          alarmRequest_ = builderForValue.build();
+          onChanged();
+        } else {
+          alarmRequestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public Builder mergeAlarmRequest(lm.Lm.AlarmRequest value) {
+        if (alarmRequestBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              alarmRequest_ != lm.Lm.AlarmRequest.getDefaultInstance()) {
+            alarmRequest_ =
+              lm.Lm.AlarmRequest.newBuilder(alarmRequest_).mergeFrom(value).buildPartial();
+          } else {
+            alarmRequest_ = value;
+          }
+          onChanged();
+        } else {
+          alarmRequestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public Builder clearAlarmRequest() {
+        if (alarmRequestBuilder_ == null) {
+          alarmRequest_ = lm.Lm.AlarmRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          alarmRequestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public lm.Lm.AlarmRequest.Builder getAlarmRequestBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getAlarmRequestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      public lm.Lm.AlarmRequestOrBuilder getAlarmRequestOrBuilder() {
+        if (alarmRequestBuilder_ != null) {
+          return alarmRequestBuilder_.getMessageOrBuilder();
+        } else {
+          return alarmRequest_;
+        }
+      }
+      /**
+       * <code>optional .lm.AlarmRequest alarm_request = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          lm.Lm.AlarmRequest, lm.Lm.AlarmRequest.Builder, lm.Lm.AlarmRequestOrBuilder> 
+          getAlarmRequestFieldBuilder() {
+        if (alarmRequestBuilder_ == null) {
+          alarmRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              lm.Lm.AlarmRequest, lm.Lm.AlarmRequest.Builder, lm.Lm.AlarmRequestOrBuilder>(
+                  getAlarmRequest(),
+                  getParentForChildren(),
+                  isClean());
+          alarmRequest_ = null;
+        }
+        return alarmRequestBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:lm.Request)
@@ -9134,6 +9344,2047 @@ public final class Lm {
     // @@protoc_insertion_point(class_scope:lm.SetScreen)
   }
 
+  public interface AlarmRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:lm.AlarmRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .lm.AlarmRequest.Type type = 1;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>required .lm.AlarmRequest.Type type = 1;</code>
+     */
+    lm.Lm.AlarmRequest.Type getType();
+
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    boolean hasAlarms();
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    lm.Lm.Alarms getAlarms();
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    lm.Lm.AlarmsOrBuilder getAlarmsOrBuilder();
+  }
+  /**
+   * Protobuf type {@code lm.AlarmRequest}
+   */
+  public static final class AlarmRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:lm.AlarmRequest)
+      AlarmRequestOrBuilder {
+    // Use AlarmRequest.newBuilder() to construct.
+    private AlarmRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AlarmRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AlarmRequest defaultInstance;
+    public static AlarmRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AlarmRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AlarmRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              lm.Lm.AlarmRequest.Type value = lm.Lm.AlarmRequest.Type.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
+              break;
+            }
+            case 18: {
+              lm.Lm.Alarms.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = alarms_.toBuilder();
+              }
+              alarms_ = input.readMessage(lm.Lm.Alarms.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(alarms_);
+                alarms_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return lm.Lm.internal_static_lm_AlarmRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return lm.Lm.internal_static_lm_AlarmRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              lm.Lm.AlarmRequest.class, lm.Lm.AlarmRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AlarmRequest> PARSER =
+        new com.google.protobuf.AbstractParser<AlarmRequest>() {
+      public AlarmRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AlarmRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AlarmRequest> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code lm.AlarmRequest.Type}
+     */
+    public enum Type
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>GET_ALARMS = 1;</code>
+       */
+      GET_ALARMS(0, 1),
+      /**
+       * <code>SET_ALARMS = 2;</code>
+       */
+      SET_ALARMS(1, 2),
+      ;
+
+      /**
+       * <code>GET_ALARMS = 1;</code>
+       */
+      public static final int GET_ALARMS_VALUE = 1;
+      /**
+       * <code>SET_ALARMS = 2;</code>
+       */
+      public static final int SET_ALARMS_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static Type valueOf(int value) {
+        switch (value) {
+          case 1: return GET_ALARMS;
+          case 2: return SET_ALARMS;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+              public Type findValueByNumber(int number) {
+                return Type.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return lm.Lm.AlarmRequest.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Type[] VALUES = values();
+
+      public static Type valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Type(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:lm.AlarmRequest.Type)
+    }
+
+    private int bitField0_;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private lm.Lm.AlarmRequest.Type type_;
+    /**
+     * <code>required .lm.AlarmRequest.Type type = 1;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .lm.AlarmRequest.Type type = 1;</code>
+     */
+    public lm.Lm.AlarmRequest.Type getType() {
+      return type_;
+    }
+
+    public static final int ALARMS_FIELD_NUMBER = 2;
+    private lm.Lm.Alarms alarms_;
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    public boolean hasAlarms() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    public lm.Lm.Alarms getAlarms() {
+      return alarms_;
+    }
+    /**
+     * <code>optional .lm.Alarms alarms = 2;</code>
+     */
+    public lm.Lm.AlarmsOrBuilder getAlarmsOrBuilder() {
+      return alarms_;
+    }
+
+    private void initFields() {
+      type_ = lm.Lm.AlarmRequest.Type.GET_ALARMS;
+      alarms_ = lm.Lm.Alarms.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasAlarms()) {
+        if (!getAlarms().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, alarms_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, alarms_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static lm.Lm.AlarmRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.AlarmRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static lm.Lm.AlarmRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.AlarmRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(lm.Lm.AlarmRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code lm.AlarmRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:lm.AlarmRequest)
+        lm.Lm.AlarmRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return lm.Lm.internal_static_lm_AlarmRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return lm.Lm.internal_static_lm_AlarmRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                lm.Lm.AlarmRequest.class, lm.Lm.AlarmRequest.Builder.class);
+      }
+
+      // Construct using lm.Lm.AlarmRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getAlarmsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = lm.Lm.AlarmRequest.Type.GET_ALARMS;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (alarmsBuilder_ == null) {
+          alarms_ = lm.Lm.Alarms.getDefaultInstance();
+        } else {
+          alarmsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return lm.Lm.internal_static_lm_AlarmRequest_descriptor;
+      }
+
+      public lm.Lm.AlarmRequest getDefaultInstanceForType() {
+        return lm.Lm.AlarmRequest.getDefaultInstance();
+      }
+
+      public lm.Lm.AlarmRequest build() {
+        lm.Lm.AlarmRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public lm.Lm.AlarmRequest buildPartial() {
+        lm.Lm.AlarmRequest result = new lm.Lm.AlarmRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (alarmsBuilder_ == null) {
+          result.alarms_ = alarms_;
+        } else {
+          result.alarms_ = alarmsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof lm.Lm.AlarmRequest) {
+          return mergeFrom((lm.Lm.AlarmRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(lm.Lm.AlarmRequest other) {
+        if (other == lm.Lm.AlarmRequest.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasAlarms()) {
+          mergeAlarms(other.getAlarms());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
+        if (hasAlarms()) {
+          if (!getAlarms().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        lm.Lm.AlarmRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (lm.Lm.AlarmRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private lm.Lm.AlarmRequest.Type type_ = lm.Lm.AlarmRequest.Type.GET_ALARMS;
+      /**
+       * <code>required .lm.AlarmRequest.Type type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .lm.AlarmRequest.Type type = 1;</code>
+       */
+      public lm.Lm.AlarmRequest.Type getType() {
+        return type_;
+      }
+      /**
+       * <code>required .lm.AlarmRequest.Type type = 1;</code>
+       */
+      public Builder setType(lm.Lm.AlarmRequest.Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .lm.AlarmRequest.Type type = 1;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = lm.Lm.AlarmRequest.Type.GET_ALARMS;
+        onChanged();
+        return this;
+      }
+
+      private lm.Lm.Alarms alarms_ = lm.Lm.Alarms.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          lm.Lm.Alarms, lm.Lm.Alarms.Builder, lm.Lm.AlarmsOrBuilder> alarmsBuilder_;
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public boolean hasAlarms() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public lm.Lm.Alarms getAlarms() {
+        if (alarmsBuilder_ == null) {
+          return alarms_;
+        } else {
+          return alarmsBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public Builder setAlarms(lm.Lm.Alarms value) {
+        if (alarmsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          alarms_ = value;
+          onChanged();
+        } else {
+          alarmsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public Builder setAlarms(
+          lm.Lm.Alarms.Builder builderForValue) {
+        if (alarmsBuilder_ == null) {
+          alarms_ = builderForValue.build();
+          onChanged();
+        } else {
+          alarmsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public Builder mergeAlarms(lm.Lm.Alarms value) {
+        if (alarmsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              alarms_ != lm.Lm.Alarms.getDefaultInstance()) {
+            alarms_ =
+              lm.Lm.Alarms.newBuilder(alarms_).mergeFrom(value).buildPartial();
+          } else {
+            alarms_ = value;
+          }
+          onChanged();
+        } else {
+          alarmsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public Builder clearAlarms() {
+        if (alarmsBuilder_ == null) {
+          alarms_ = lm.Lm.Alarms.getDefaultInstance();
+          onChanged();
+        } else {
+          alarmsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public lm.Lm.Alarms.Builder getAlarmsBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getAlarmsFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      public lm.Lm.AlarmsOrBuilder getAlarmsOrBuilder() {
+        if (alarmsBuilder_ != null) {
+          return alarmsBuilder_.getMessageOrBuilder();
+        } else {
+          return alarms_;
+        }
+      }
+      /**
+       * <code>optional .lm.Alarms alarms = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          lm.Lm.Alarms, lm.Lm.Alarms.Builder, lm.Lm.AlarmsOrBuilder> 
+          getAlarmsFieldBuilder() {
+        if (alarmsBuilder_ == null) {
+          alarmsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              lm.Lm.Alarms, lm.Lm.Alarms.Builder, lm.Lm.AlarmsOrBuilder>(
+                  getAlarms(),
+                  getParentForChildren(),
+                  isClean());
+          alarms_ = null;
+        }
+        return alarmsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:lm.AlarmRequest)
+    }
+
+    static {
+      defaultInstance = new AlarmRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:lm.AlarmRequest)
+  }
+
+  public interface AlarmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:lm.Alarm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required uint32 time = 1;</code>
+     */
+    boolean hasTime();
+    /**
+     * <code>required uint32 time = 1;</code>
+     */
+    int getTime();
+
+    /**
+     * <code>required string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>required string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>required string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>required bool enabled = 3;</code>
+     */
+    boolean hasEnabled();
+    /**
+     * <code>required bool enabled = 3;</code>
+     */
+    boolean getEnabled();
+  }
+  /**
+   * Protobuf type {@code lm.Alarm}
+   */
+  public static final class Alarm extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:lm.Alarm)
+      AlarmOrBuilder {
+    // Use Alarm.newBuilder() to construct.
+    private Alarm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Alarm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Alarm defaultInstance;
+    public static Alarm getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Alarm getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Alarm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              time_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              enabled_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return lm.Lm.internal_static_lm_Alarm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return lm.Lm.internal_static_lm_Alarm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              lm.Lm.Alarm.class, lm.Lm.Alarm.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Alarm> PARSER =
+        new com.google.protobuf.AbstractParser<Alarm>() {
+      public Alarm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Alarm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Alarm> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TIME_FIELD_NUMBER = 1;
+    private int time_;
+    /**
+     * <code>required uint32 time = 1;</code>
+     */
+    public boolean hasTime() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 time = 1;</code>
+     */
+    public int getTime() {
+      return time_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>required string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ENABLED_FIELD_NUMBER = 3;
+    private boolean enabled_;
+    /**
+     * <code>required bool enabled = 3;</code>
+     */
+    public boolean hasEnabled() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bool enabled = 3;</code>
+     */
+    public boolean getEnabled() {
+      return enabled_;
+    }
+
+    private void initFields() {
+      time_ = 0;
+      name_ = "";
+      enabled_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEnabled()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, time_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, enabled_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, time_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, enabled_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static lm.Lm.Alarm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.Alarm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.Alarm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.Alarm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.Alarm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.Alarm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.Alarm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static lm.Lm.Alarm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.Alarm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.Alarm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(lm.Lm.Alarm prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code lm.Alarm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:lm.Alarm)
+        lm.Lm.AlarmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return lm.Lm.internal_static_lm_Alarm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return lm.Lm.internal_static_lm_Alarm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                lm.Lm.Alarm.class, lm.Lm.Alarm.Builder.class);
+      }
+
+      // Construct using lm.Lm.Alarm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        time_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        enabled_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return lm.Lm.internal_static_lm_Alarm_descriptor;
+      }
+
+      public lm.Lm.Alarm getDefaultInstanceForType() {
+        return lm.Lm.Alarm.getDefaultInstance();
+      }
+
+      public lm.Lm.Alarm build() {
+        lm.Lm.Alarm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public lm.Lm.Alarm buildPartial() {
+        lm.Lm.Alarm result = new lm.Lm.Alarm(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.time_ = time_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.enabled_ = enabled_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof lm.Lm.Alarm) {
+          return mergeFrom((lm.Lm.Alarm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(lm.Lm.Alarm other) {
+        if (other == lm.Lm.Alarm.getDefaultInstance()) return this;
+        if (other.hasTime()) {
+          setTime(other.getTime());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasEnabled()) {
+          setEnabled(other.getEnabled());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasTime()) {
+          
+          return false;
+        }
+        if (!hasName()) {
+          
+          return false;
+        }
+        if (!hasEnabled()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        lm.Lm.Alarm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (lm.Lm.Alarm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int time_ ;
+      /**
+       * <code>required uint32 time = 1;</code>
+       */
+      public boolean hasTime() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 time = 1;</code>
+       */
+      public int getTime() {
+        return time_;
+      }
+      /**
+       * <code>required uint32 time = 1;</code>
+       */
+      public Builder setTime(int value) {
+        bitField0_ |= 0x00000001;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 time = 1;</code>
+       */
+      public Builder clearTime() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        time_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean enabled_ ;
+      /**
+       * <code>required bool enabled = 3;</code>
+       */
+      public boolean hasEnabled() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bool enabled = 3;</code>
+       */
+      public boolean getEnabled() {
+        return enabled_;
+      }
+      /**
+       * <code>required bool enabled = 3;</code>
+       */
+      public Builder setEnabled(boolean value) {
+        bitField0_ |= 0x00000004;
+        enabled_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool enabled = 3;</code>
+       */
+      public Builder clearEnabled() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        enabled_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:lm.Alarm)
+    }
+
+    static {
+      defaultInstance = new Alarm(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:lm.Alarm)
+  }
+
+  public interface AlarmsOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:lm.Alarms)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    java.util.List<lm.Lm.Alarm> 
+        getAlarmsList();
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    lm.Lm.Alarm getAlarms(int index);
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    int getAlarmsCount();
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    java.util.List<? extends lm.Lm.AlarmOrBuilder> 
+        getAlarmsOrBuilderList();
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    lm.Lm.AlarmOrBuilder getAlarmsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code lm.Alarms}
+   */
+  public static final class Alarms extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:lm.Alarms)
+      AlarmsOrBuilder {
+    // Use Alarms.newBuilder() to construct.
+    private Alarms(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Alarms(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Alarms defaultInstance;
+    public static Alarms getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Alarms getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Alarms(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                alarms_ = new java.util.ArrayList<lm.Lm.Alarm>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              alarms_.add(input.readMessage(lm.Lm.Alarm.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          alarms_ = java.util.Collections.unmodifiableList(alarms_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return lm.Lm.internal_static_lm_Alarms_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return lm.Lm.internal_static_lm_Alarms_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              lm.Lm.Alarms.class, lm.Lm.Alarms.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Alarms> PARSER =
+        new com.google.protobuf.AbstractParser<Alarms>() {
+      public Alarms parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Alarms(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Alarms> getParserForType() {
+      return PARSER;
+    }
+
+    public static final int ALARMS_FIELD_NUMBER = 1;
+    private java.util.List<lm.Lm.Alarm> alarms_;
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    public java.util.List<lm.Lm.Alarm> getAlarmsList() {
+      return alarms_;
+    }
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    public java.util.List<? extends lm.Lm.AlarmOrBuilder> 
+        getAlarmsOrBuilderList() {
+      return alarms_;
+    }
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    public int getAlarmsCount() {
+      return alarms_.size();
+    }
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    public lm.Lm.Alarm getAlarms(int index) {
+      return alarms_.get(index);
+    }
+    /**
+     * <code>repeated .lm.Alarm alarms = 1;</code>
+     */
+    public lm.Lm.AlarmOrBuilder getAlarmsOrBuilder(
+        int index) {
+      return alarms_.get(index);
+    }
+
+    private void initFields() {
+      alarms_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getAlarmsCount(); i++) {
+        if (!getAlarms(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < alarms_.size(); i++) {
+        output.writeMessage(1, alarms_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < alarms_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, alarms_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static lm.Lm.Alarms parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.Alarms parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.Alarms parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static lm.Lm.Alarms parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static lm.Lm.Alarms parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.Alarms parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.Alarms parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static lm.Lm.Alarms parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static lm.Lm.Alarms parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static lm.Lm.Alarms parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(lm.Lm.Alarms prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code lm.Alarms}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:lm.Alarms)
+        lm.Lm.AlarmsOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return lm.Lm.internal_static_lm_Alarms_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return lm.Lm.internal_static_lm_Alarms_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                lm.Lm.Alarms.class, lm.Lm.Alarms.Builder.class);
+      }
+
+      // Construct using lm.Lm.Alarms.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getAlarmsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (alarmsBuilder_ == null) {
+          alarms_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          alarmsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return lm.Lm.internal_static_lm_Alarms_descriptor;
+      }
+
+      public lm.Lm.Alarms getDefaultInstanceForType() {
+        return lm.Lm.Alarms.getDefaultInstance();
+      }
+
+      public lm.Lm.Alarms build() {
+        lm.Lm.Alarms result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public lm.Lm.Alarms buildPartial() {
+        lm.Lm.Alarms result = new lm.Lm.Alarms(this);
+        int from_bitField0_ = bitField0_;
+        if (alarmsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            alarms_ = java.util.Collections.unmodifiableList(alarms_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.alarms_ = alarms_;
+        } else {
+          result.alarms_ = alarmsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof lm.Lm.Alarms) {
+          return mergeFrom((lm.Lm.Alarms)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(lm.Lm.Alarms other) {
+        if (other == lm.Lm.Alarms.getDefaultInstance()) return this;
+        if (alarmsBuilder_ == null) {
+          if (!other.alarms_.isEmpty()) {
+            if (alarms_.isEmpty()) {
+              alarms_ = other.alarms_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureAlarmsIsMutable();
+              alarms_.addAll(other.alarms_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.alarms_.isEmpty()) {
+            if (alarmsBuilder_.isEmpty()) {
+              alarmsBuilder_.dispose();
+              alarmsBuilder_ = null;
+              alarms_ = other.alarms_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              alarmsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAlarmsFieldBuilder() : null;
+            } else {
+              alarmsBuilder_.addAllMessages(other.alarms_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getAlarmsCount(); i++) {
+          if (!getAlarms(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        lm.Lm.Alarms parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (lm.Lm.Alarms) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<lm.Lm.Alarm> alarms_ =
+        java.util.Collections.emptyList();
+      private void ensureAlarmsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          alarms_ = new java.util.ArrayList<lm.Lm.Alarm>(alarms_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          lm.Lm.Alarm, lm.Lm.Alarm.Builder, lm.Lm.AlarmOrBuilder> alarmsBuilder_;
+
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public java.util.List<lm.Lm.Alarm> getAlarmsList() {
+        if (alarmsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(alarms_);
+        } else {
+          return alarmsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public int getAlarmsCount() {
+        if (alarmsBuilder_ == null) {
+          return alarms_.size();
+        } else {
+          return alarmsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public lm.Lm.Alarm getAlarms(int index) {
+        if (alarmsBuilder_ == null) {
+          return alarms_.get(index);
+        } else {
+          return alarmsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder setAlarms(
+          int index, lm.Lm.Alarm value) {
+        if (alarmsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAlarmsIsMutable();
+          alarms_.set(index, value);
+          onChanged();
+        } else {
+          alarmsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder setAlarms(
+          int index, lm.Lm.Alarm.Builder builderForValue) {
+        if (alarmsBuilder_ == null) {
+          ensureAlarmsIsMutable();
+          alarms_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          alarmsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder addAlarms(lm.Lm.Alarm value) {
+        if (alarmsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAlarmsIsMutable();
+          alarms_.add(value);
+          onChanged();
+        } else {
+          alarmsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder addAlarms(
+          int index, lm.Lm.Alarm value) {
+        if (alarmsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAlarmsIsMutable();
+          alarms_.add(index, value);
+          onChanged();
+        } else {
+          alarmsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder addAlarms(
+          lm.Lm.Alarm.Builder builderForValue) {
+        if (alarmsBuilder_ == null) {
+          ensureAlarmsIsMutable();
+          alarms_.add(builderForValue.build());
+          onChanged();
+        } else {
+          alarmsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder addAlarms(
+          int index, lm.Lm.Alarm.Builder builderForValue) {
+        if (alarmsBuilder_ == null) {
+          ensureAlarmsIsMutable();
+          alarms_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          alarmsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder addAllAlarms(
+          java.lang.Iterable<? extends lm.Lm.Alarm> values) {
+        if (alarmsBuilder_ == null) {
+          ensureAlarmsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, alarms_);
+          onChanged();
+        } else {
+          alarmsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder clearAlarms() {
+        if (alarmsBuilder_ == null) {
+          alarms_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          alarmsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public Builder removeAlarms(int index) {
+        if (alarmsBuilder_ == null) {
+          ensureAlarmsIsMutable();
+          alarms_.remove(index);
+          onChanged();
+        } else {
+          alarmsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public lm.Lm.Alarm.Builder getAlarmsBuilder(
+          int index) {
+        return getAlarmsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public lm.Lm.AlarmOrBuilder getAlarmsOrBuilder(
+          int index) {
+        if (alarmsBuilder_ == null) {
+          return alarms_.get(index);  } else {
+          return alarmsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public java.util.List<? extends lm.Lm.AlarmOrBuilder> 
+           getAlarmsOrBuilderList() {
+        if (alarmsBuilder_ != null) {
+          return alarmsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(alarms_);
+        }
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public lm.Lm.Alarm.Builder addAlarmsBuilder() {
+        return getAlarmsFieldBuilder().addBuilder(
+            lm.Lm.Alarm.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public lm.Lm.Alarm.Builder addAlarmsBuilder(
+          int index) {
+        return getAlarmsFieldBuilder().addBuilder(
+            index, lm.Lm.Alarm.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .lm.Alarm alarms = 1;</code>
+       */
+      public java.util.List<lm.Lm.Alarm.Builder> 
+           getAlarmsBuilderList() {
+        return getAlarmsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          lm.Lm.Alarm, lm.Lm.Alarm.Builder, lm.Lm.AlarmOrBuilder> 
+          getAlarmsFieldBuilder() {
+        if (alarmsBuilder_ == null) {
+          alarmsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              lm.Lm.Alarm, lm.Lm.Alarm.Builder, lm.Lm.AlarmOrBuilder>(
+                  alarms_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          alarms_ = null;
+        }
+        return alarmsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:lm.Alarms)
+    }
+
+    static {
+      defaultInstance = new Alarms(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:lm.Alarms)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_lm_Request_descriptor;
   private static
@@ -9194,6 +11445,21 @@ public final class Lm {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_lm_SetScreen_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lm_AlarmRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_lm_AlarmRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lm_Alarm_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_lm_Alarm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lm_Alarms_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_lm_Alarms_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9203,7 +11469,7 @@ public final class Lm {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\010lm.proto\022\002lm\"\300\004\n\007Request\022\036\n\004type\030\001 \002(\016" +
+      "\n\010lm.proto\022\002lm\"\373\004\n\007Request\022\036\n\004type\030\001 \002(\016" +
       "2\020.lm.Request.Type\022\036\n\010setpixel\030\002 \001(\0132\014.l" +
       "m.SetPixel\022\026\n\004fill\030\003 \001(\0132\010.lm.Fill\022\"\n\ncr" +
       "eatefont\030\004 \001(\0132\016.lm.CreateFont\022$\n\013destro" +
@@ -9212,26 +11478,32 @@ public final class Lm {
       "ing\030\007 \001(\0132\021.lm.DestroyString\022*\n\016populate" +
       "string\030\010 \001(\0132\022.lm.PopulateString\022&\n\014rend" +
       "erstring\030\t \001(\0132\020.lm.RenderString\022 \n\tsets" +
-      "creen\030\n \001(\0132\r.lm.SetScreen\"\314\001\n\004Type\022\014\n\010S",
-      "ETPIXEL\020\001\022\010\n\004FILL\020\002\022\016\n\nCREATEFONT\020\003\022\017\n\013D" +
-      "ESTROYFONT\020\004\022\017\n\013PRINTSTRING\020\005\022\021\n\rDESTROY" +
-      "STRING\020\006\022\022\n\016POPULATESTRING\020\007\022\020\n\014RENDERST" +
-      "RING\020\010\022\r\n\tSETSCREEN\020\t\022\017\n\013SWAPBUFFERS\020 \022\t" +
-      "\n\005PAUSE\020!\022\013\n\007UNPAUSE\020\"\022\t\n\005CLEAR\020$\" \n\010Pos" +
-      "ition\022\t\n\001x\030\001 \002(\r\022\t\n\001y\030\002 \002(\r\"&\n\003RGB\022\t\n\001r\030" +
-      "\001 \002(\r\022\t\n\001g\030\002 \002(\r\022\t\n\001b\030\003 \002(\r\";\n\010SetPixel\022" +
-      "\031\n\003pos\030\001 \002(\0132\014.lm.Position\022\024\n\003rgb\030\002 \002(\0132" +
-      "\007.lm.RGB\"\034\n\004Fill\022\024\n\003rgb\030\001 \002(\0132\007.lm.RGB\"4" +
-      "\n\nCreateFont\022\n\n\002id\030\001 \002(\r\022\014\n\004size\030\002 \002(\r\022\014",
-      "\n\004font\030\003 \002(\t\"\031\n\013DestroyFont\022\n\n\002id\030\001 \002(\r\"" +
-      "Z\n\013PrintString\022\031\n\003pos\030\001 \002(\0132\014.lm.Positio" +
-      "n\022\024\n\003rgb\030\002 \002(\0132\007.lm.RGB\022\014\n\004font\030\003 \002(\r\022\014\n" +
-      "\004text\030\004 \002(\t\"\033\n\rDestroyString\022\n\n\002id\030\001 \002(\r" +
-      "\"8\n\016PopulateString\022\n\n\002id\030\001 \002(\r\022\014\n\004font\030\002" +
-      " \002(\r\022\014\n\004text\030\003 \002(\t\"K\n\014RenderString\022\n\n\002id" +
-      "\030\001 \002(\r\022\031\n\003pos\030\002 \002(\0132\014.lm.Position\022\024\n\003rgb" +
-      "\030\003 \002(\0132\007.lm.RGB\"\031\n\tSetScreen\022\014\n\004name\030\001 \002" +
-      "(\t"
+      "creen\030\n \001(\0132\r.lm.SetScreen\022\'\n\ralarm_requ",
+      "est\030\013 \001(\0132\020.lm.AlarmRequest\"\336\001\n\004Type\022\014\n\010" +
+      "SETPIXEL\020\001\022\010\n\004FILL\020\002\022\016\n\nCREATEFONT\020\003\022\017\n\013" +
+      "DESTROYFONT\020\004\022\017\n\013PRINTSTRING\020\005\022\021\n\rDESTRO" +
+      "YSTRING\020\006\022\022\n\016POPULATESTRING\020\007\022\020\n\014RENDERS" +
+      "TRING\020\010\022\r\n\tSETSCREEN\020\t\022\020\n\014ALARM_REQUST\020\n" +
+      "\022\017\n\013SWAPBUFFERS\020 \022\t\n\005PAUSE\020!\022\013\n\007UNPAUSE\020" +
+      "\"\022\t\n\005CLEAR\020$\" \n\010Position\022\t\n\001x\030\001 \002(\r\022\t\n\001y" +
+      "\030\002 \002(\r\"&\n\003RGB\022\t\n\001r\030\001 \002(\r\022\t\n\001g\030\002 \002(\r\022\t\n\001b" +
+      "\030\003 \002(\r\";\n\010SetPixel\022\031\n\003pos\030\001 \002(\0132\014.lm.Pos" +
+      "ition\022\024\n\003rgb\030\002 \002(\0132\007.lm.RGB\"\034\n\004Fill\022\024\n\003r",
+      "gb\030\001 \002(\0132\007.lm.RGB\"4\n\nCreateFont\022\n\n\002id\030\001 " +
+      "\002(\r\022\014\n\004size\030\002 \002(\r\022\014\n\004font\030\003 \002(\t\"\031\n\013Destr" +
+      "oyFont\022\n\n\002id\030\001 \002(\r\"Z\n\013PrintString\022\031\n\003pos" +
+      "\030\001 \002(\0132\014.lm.Position\022\024\n\003rgb\030\002 \002(\0132\007.lm.R" +
+      "GB\022\014\n\004font\030\003 \002(\r\022\014\n\004text\030\004 \002(\t\"\033\n\rDestro" +
+      "yString\022\n\n\002id\030\001 \002(\r\"8\n\016PopulateString\022\n\n" +
+      "\002id\030\001 \002(\r\022\014\n\004font\030\002 \002(\r\022\014\n\004text\030\003 \002(\t\"K\n" +
+      "\014RenderString\022\n\n\002id\030\001 \002(\r\022\031\n\003pos\030\002 \002(\0132\014" +
+      ".lm.Position\022\024\n\003rgb\030\003 \002(\0132\007.lm.RGB\"\031\n\tSe" +
+      "tScreen\022\014\n\004name\030\001 \002(\t\"w\n\014AlarmRequest\022#\n",
+      "\004type\030\001 \002(\0162\025.lm.AlarmRequest.Type\022\032\n\006al" +
+      "arms\030\002 \001(\0132\n.lm.Alarms\"&\n\004Type\022\016\n\nGET_AL" +
+      "ARMS\020\001\022\016\n\nSET_ALARMS\020\002\"4\n\005Alarm\022\014\n\004time\030" +
+      "\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007enabled\030\003 \002(\010\"#\n\006" +
+      "Alarms\022\031\n\006alarms\030\001 \003(\0132\t.lm.Alarm"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9250,7 +11522,7 @@ public final class Lm {
     internal_static_lm_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lm_Request_descriptor,
-        new java.lang.String[] { "Type", "Setpixel", "Fill", "Createfont", "Destroyfont", "Printstring", "Destroystring", "Populatestring", "Renderstring", "Setscreen", });
+        new java.lang.String[] { "Type", "Setpixel", "Fill", "Createfont", "Destroyfont", "Printstring", "Destroystring", "Populatestring", "Renderstring", "Setscreen", "AlarmRequest", });
     internal_static_lm_Position_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_lm_Position_fieldAccessorTable = new
@@ -9317,6 +11589,24 @@ public final class Lm {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_lm_SetScreen_descriptor,
         new java.lang.String[] { "Name", });
+    internal_static_lm_AlarmRequest_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_lm_AlarmRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_lm_AlarmRequest_descriptor,
+        new java.lang.String[] { "Type", "Alarms", });
+    internal_static_lm_Alarm_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_lm_Alarm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_lm_Alarm_descriptor,
+        new java.lang.String[] { "Time", "Name", "Enabled", });
+    internal_static_lm_Alarms_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_lm_Alarms_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_lm_Alarms_descriptor,
+        new java.lang.String[] { "Alarms", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

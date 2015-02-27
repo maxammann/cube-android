@@ -5,20 +5,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import max.cube.AlarmPopulator;
+import max.cube.publisher.AlarmPublisher;
 import max.cube.R;
 import max.cube.dao.Alarm;
 
 
-public class OnTimerSetListener  implements TimePickerDialog.OnTimeSetListener {
+public class OnTimerSetListener implements TimePickerDialog.OnTimeSetListener {
 
     private View dialogView;
 
-    private final AlarmPopulator alarms;
+    private final AlarmPublisher alarms;
 
     private boolean fired = false;
 
-    public OnTimerSetListener(AlarmPopulator alarms) {
+    public OnTimerSetListener(AlarmPublisher alarms) {
         this.alarms = alarms;
     }
 
@@ -37,6 +37,7 @@ public class OnTimerSetListener  implements TimePickerDialog.OnTimeSetListener {
         alarm.setName(name);
 
         alarm.setWake(minute * 60 + hourOfDay * 60 * 60);
+        alarm.setEnabled(true);
 
         alarms.push(alarm);
         alarms.populateView();

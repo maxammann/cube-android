@@ -9,6 +9,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import de.greenrobot.dao.GreenDaoListAdapter;
@@ -18,7 +19,7 @@ import max.cube.dao.Alarm;
 import max.cube.dao.AlarmDao;
 
 
-class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
+public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
 
     private final AlarmDao alarmDao;
 
@@ -41,7 +42,7 @@ class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
 
         final TextView alarm = (TextView) view.findViewById(R.id.time);
 
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
         alarm.setText(format.format(item.getWake().longValue() * 1000));
 

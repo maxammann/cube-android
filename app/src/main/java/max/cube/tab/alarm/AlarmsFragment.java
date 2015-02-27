@@ -1,6 +1,5 @@
 package max.cube.tab.alarm;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,17 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import de.greenrobot.dao.query.LazyList;
-import max.cube.AlarmPopulator;
+import max.cube.publisher.AlarmPublisher;
+import max.cube.MainActivity;
 import max.cube.R;
-import max.cube.dao.Alarm;
-import max.cube.dao.AlarmDao;
+import max.cube.publisher.DatabaseAlarmPublisher;
 
 
-public class AlarmsFragment extends Fragment implements AlarmPopulator {
+public class AlarmsFragment extends Fragment {
 
-    public AlarmDao alarmDao;
 
+    private AlarmPublisher alarmPublisher;
     private ListView list;
     private ViewGroup root;
 
@@ -33,62 +31,26 @@ public class AlarmsFragment extends Fragment implements AlarmPopulator {
             @Override
             public void onClick(View v) {
                 AddAlarmDialogFragment addAlarm = new AddAlarmDialogFragment();
-                addAlarm.alarms = AlarmsFragment.this;
+                addAlarm.setAlarmPublisher(alarmPublisher);
                 addAlarm.show(getActivity().getSupportFragmentManager(), "add_alarm");
             }
         });
 
-        list.setOnItemLongClickListener(new DeleteListener(alarmDao, this, getActivity()));
+        list.setOnItemLongClickListener(new DeleteListener(alarmPublisher, (MainActivity) getActivity()));
 
-        populateView();
+        alarmPublisher.populateView();
         return root;
     }
 
-    @Override
-    public void populateView() {
-        new PopulateTask().execute();
+    public ListView getList() {
+        return list;
     }
 
-    @Override
-    public void push(final Alarm alarm) {
-        alarm.setName(alarm.getName());
-        alarm.setWake(alarm.getWake());
-
-        new AsyncTask<Alarm, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Alarm... params) {
-                alarmDao.insert(params[0]);
-                return null;
-            }
-        }.execute(alarm);
+    public ViewGroup getRoot() {
+        return root;
     }
 
-    private class PopulateTask extends AsyncTask<Void, Void, AlarmsLazyListAdapter> {
-        @Override
-        protected AlarmsLazyListAdapter doInBackground(Void... params) {
-            if (alarmDao == null) {
-                return null;
-            }
-
-            LazyList<Alarm> query = alarmDao.queryBuilder().listLazy();
-            final AlarmsLazyListAdapter adapter = new AlarmsLazyListAdapter(getActivity(), query, alarmDao);
-            adapter.isEmpty();
-
-            return adapter;
-        }
-
-        @Override
-        protected void onPostExecute(AlarmsLazyListAdapter adapter) {
-            if (adapter == null) {
-                return;
-            }
-
-            View startMessage = root.findViewById(R.id.start_message);
-
-            startMessage.setVisibility(!adapter.isEmpty() ? View.GONE : View.VISIBLE);
-
-            list.setAdapter(adapter);
-        }
+    public void setupPublisher(MainActivity mainActivity) {
+        alarmPublisher = new DatabaseAlarmPublisher(mainActivity, this);
     }
 }

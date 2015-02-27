@@ -8,13 +8,13 @@ import android.text.format.DateFormat;
 
 import java.util.Calendar;
 
-import max.cube.AlarmPopulator;
+import max.cube.publisher.AlarmPublisher;
 import max.cube.R;
 
 
 public class AddAlarmDialogFragment extends DialogFragment {
 
-    AlarmPopulator alarms;
+    private AlarmPublisher alarmPublisher;
 
     @NonNull
     @Override
@@ -26,10 +26,9 @@ public class AddAlarmDialogFragment extends DialogFragment {
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
 
-        OnTimerSetListener callBack = new OnTimerSetListener(alarms);
+        OnTimerSetListener callBack = new OnTimerSetListener(alarmPublisher);
 
         boolean h24 = DateFormat.is24HourFormat(getActivity());
-
 
 
         CustomTimePickerDialog timePicker = new CustomTimePickerDialog(
@@ -40,14 +39,17 @@ public class AddAlarmDialogFragment extends DialogFragment {
                 R.id.timePicker,
                 hour,
                 minute,
-              h24
+                h24
 
         );
 
         callBack.setDialogView(timePicker.getView());
 
+
         return timePicker;
     }
 
-
+    public void setAlarmPublisher(AlarmPublisher alarmPublisher) {
+        this.alarmPublisher = alarmPublisher;
+    }
 }

@@ -5,17 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import max.cube.dao.AlarmDao;
-import max.cube.tab.alarm.AlarmsFragment;
 import max.cube.tab.DummySectionFragment;
+import max.cube.tab.alarm.AlarmsFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
-    private final AlarmDao alarmDao;
+    private final MainActivity mainActivity;
 
-    public TabsPagerAdapter(FragmentManager fm, AlarmDao alarmDao) {
+    public TabsPagerAdapter(FragmentManager fm, MainActivity mainActivity) {
         super(fm);
-        this.alarmDao = alarmDao;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -23,10 +22,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 AlarmsFragment alarmsFragment = new AlarmsFragment();
-                alarmsFragment.alarmDao = alarmDao;
-
+                alarmsFragment.setupPublisher(mainActivity);
                 return alarmsFragment;
-
             default:
                 Fragment fragment = new DummySectionFragment();
                 Bundle args = new Bundle();

@@ -1,8 +1,8 @@
-package max.cube;
+package max.cube.publisher;
 
 import max.cube.dao.Alarm;
 
-public interface AlarmPopulator {
+public interface AlarmPublisher {
 
     void populateView();
 

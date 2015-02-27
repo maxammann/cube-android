@@ -21,13 +21,14 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/start_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="100dp"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="Add a new Alarm!"
-        android:id="@+id/start_message"
-        android:layout_gravity="center"/>
+        android:textSize="100dp" />
+
 
     <ListView
         android:id="@+id/alarm_list"
@@ -35,15 +36,24 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
+
     <com.getbase.floatingactionbutton.AddFloatingActionButton
         android:id="@+id/add_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         fab:fab_colorNormal="@android:color/white"
         fab:fab_colorPressed="#f1f1f1"
-        fab:fab_plusIconColor="#808080"
-        android:layout_gravity="right|bottom" />
+        fab:fab_plusIconColor="#808080" />
 
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="103dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:indeterminate="true"
+        android:visibility="gone"/>
 </FrameLayout>

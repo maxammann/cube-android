@@ -1,6 +1,5 @@
 package max.cube.tab.alarm;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -9,18 +8,16 @@ import android.widget.AdapterView;
 
 import com.cocosw.undobar.UndoBarController;
 
-import max.cube.AlarmPopulator;
+import max.cube.publisher.AlarmPublisher;
+import max.cube.MainActivity;
 import max.cube.dao.Alarm;
-import max.cube.dao.AlarmDao;
 
 class DeleteListener implements AdapterView.OnItemLongClickListener {
-    private final AlarmDao alarmDao;
-    private final AlarmPopulator populator;
-    private final Activity activity;
+    private final AlarmPublisher populator;
+    private final MainActivity activity;
 
 
-    public DeleteListener(AlarmDao alarmDao, AlarmPopulator populator, Activity activity) {
-        this.alarmDao = alarmDao;
+    public DeleteListener(AlarmPublisher populator, MainActivity activity) {
         this.populator = populator;
         this.activity = activity;
     }
@@ -35,7 +32,7 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
                 @Override
                 protected Alarm doInBackground(Alarm... params) {
                     Alarm alarm = params[0];
-                    alarmDao.delete(alarm);
+                    activity.getAlarmDao().delete(alarm);
                     return alarm;
                 }
 
