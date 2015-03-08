@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import max.cube.tab.DummySectionFragment;
+import max.cube.tab.MenuFragment;
 import max.cube.tab.alarm.AlarmsFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
@@ -24,6 +25,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 AlarmsFragment alarmsFragment = new AlarmsFragment();
                 alarmsFragment.setupPublisher(mainActivity);
                 return alarmsFragment;
+            case 1:
+                MenuFragment main = new MenuFragment();
+                main.mainActivity = mainActivity;
+                return main;
             default:
                 Fragment fragment = new DummySectionFragment();
                 Bundle args = new Bundle();
@@ -35,7 +40,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -43,6 +48,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return "Alarms";
+            case 1:
+                return "Menu";
             default:
                 return "Dummy";
         }

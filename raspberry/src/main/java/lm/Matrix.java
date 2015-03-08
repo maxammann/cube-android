@@ -93,6 +93,10 @@ public class Matrix {
         sendRequest(setAlarms.build());
     }
 
+    public void next() throws IOException {
+        sendRequest(Request.newBuilder().setType(Request.Type.MENU_NEXT).build());
+    }
+
     private void sendRequest(Request request) throws IOException {
         byte[] bytes = request.toByteArray();
 

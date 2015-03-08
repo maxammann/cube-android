@@ -429,21 +429,25 @@ public final class Lm {
        */
       ALARM_REQUST(9, 10),
       /**
+       * <code>MENU_NEXT = 20;</code>
+       */
+      MENU_NEXT(10, 20),
+      /**
        * <code>SWAPBUFFERS = 32;</code>
        */
-      SWAPBUFFERS(10, 32),
+      SWAPBUFFERS(11, 32),
       /**
        * <code>PAUSE = 33;</code>
        */
-      PAUSE(11, 33),
+      PAUSE(12, 33),
       /**
        * <code>UNPAUSE = 34;</code>
        */
-      UNPAUSE(12, 34),
+      UNPAUSE(13, 34),
       /**
        * <code>CLEAR = 36;</code>
        */
-      CLEAR(13, 36),
+      CLEAR(14, 36),
       ;
 
       /**
@@ -487,6 +491,10 @@ public final class Lm {
        */
       public static final int ALARM_REQUST_VALUE = 10;
       /**
+       * <code>MENU_NEXT = 20;</code>
+       */
+      public static final int MENU_NEXT_VALUE = 20;
+      /**
        * <code>SWAPBUFFERS = 32;</code>
        */
       public static final int SWAPBUFFERS_VALUE = 32;
@@ -518,6 +526,7 @@ public final class Lm {
           case 8: return RENDERSTRING;
           case 9: return SETSCREEN;
           case 10: return ALARM_REQUST;
+          case 20: return MENU_NEXT;
           case 32: return SWAPBUFFERS;
           case 33: return PAUSE;
           case 34: return UNPAUSE;
@@ -11469,7 +11478,7 @@ public final class Lm {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\010lm.proto\022\002lm\"\373\004\n\007Request\022\036\n\004type\030\001 \002(\016" +
+      "\n\010lm.proto\022\002lm\"\212\005\n\007Request\022\036\n\004type\030\001 \002(\016" +
       "2\020.lm.Request.Type\022\036\n\010setpixel\030\002 \001(\0132\014.l" +
       "m.SetPixel\022\026\n\004fill\030\003 \001(\0132\010.lm.Fill\022\"\n\ncr" +
       "eatefont\030\004 \001(\0132\016.lm.CreateFont\022$\n\013destro" +
@@ -11479,31 +11488,32 @@ public final class Lm {
       "string\030\010 \001(\0132\022.lm.PopulateString\022&\n\014rend" +
       "erstring\030\t \001(\0132\020.lm.RenderString\022 \n\tsets" +
       "creen\030\n \001(\0132\r.lm.SetScreen\022\'\n\ralarm_requ",
-      "est\030\013 \001(\0132\020.lm.AlarmRequest\"\336\001\n\004Type\022\014\n\010" +
+      "est\030\013 \001(\0132\020.lm.AlarmRequest\"\355\001\n\004Type\022\014\n\010" +
       "SETPIXEL\020\001\022\010\n\004FILL\020\002\022\016\n\nCREATEFONT\020\003\022\017\n\013" +
       "DESTROYFONT\020\004\022\017\n\013PRINTSTRING\020\005\022\021\n\rDESTRO" +
       "YSTRING\020\006\022\022\n\016POPULATESTRING\020\007\022\020\n\014RENDERS" +
       "TRING\020\010\022\r\n\tSETSCREEN\020\t\022\020\n\014ALARM_REQUST\020\n" +
-      "\022\017\n\013SWAPBUFFERS\020 \022\t\n\005PAUSE\020!\022\013\n\007UNPAUSE\020" +
-      "\"\022\t\n\005CLEAR\020$\" \n\010Position\022\t\n\001x\030\001 \002(\r\022\t\n\001y" +
-      "\030\002 \002(\r\"&\n\003RGB\022\t\n\001r\030\001 \002(\r\022\t\n\001g\030\002 \002(\r\022\t\n\001b" +
-      "\030\003 \002(\r\";\n\010SetPixel\022\031\n\003pos\030\001 \002(\0132\014.lm.Pos" +
-      "ition\022\024\n\003rgb\030\002 \002(\0132\007.lm.RGB\"\034\n\004Fill\022\024\n\003r",
-      "gb\030\001 \002(\0132\007.lm.RGB\"4\n\nCreateFont\022\n\n\002id\030\001 " +
-      "\002(\r\022\014\n\004size\030\002 \002(\r\022\014\n\004font\030\003 \002(\t\"\031\n\013Destr" +
-      "oyFont\022\n\n\002id\030\001 \002(\r\"Z\n\013PrintString\022\031\n\003pos" +
-      "\030\001 \002(\0132\014.lm.Position\022\024\n\003rgb\030\002 \002(\0132\007.lm.R" +
-      "GB\022\014\n\004font\030\003 \002(\r\022\014\n\004text\030\004 \002(\t\"\033\n\rDestro" +
-      "yString\022\n\n\002id\030\001 \002(\r\"8\n\016PopulateString\022\n\n" +
-      "\002id\030\001 \002(\r\022\014\n\004font\030\002 \002(\r\022\014\n\004text\030\003 \002(\t\"K\n" +
-      "\014RenderString\022\n\n\002id\030\001 \002(\r\022\031\n\003pos\030\002 \002(\0132\014" +
-      ".lm.Position\022\024\n\003rgb\030\003 \002(\0132\007.lm.RGB\"\031\n\tSe" +
-      "tScreen\022\014\n\004name\030\001 \002(\t\"w\n\014AlarmRequest\022#\n",
-      "\004type\030\001 \002(\0162\025.lm.AlarmRequest.Type\022\032\n\006al" +
-      "arms\030\002 \001(\0132\n.lm.Alarms\"&\n\004Type\022\016\n\nGET_AL" +
-      "ARMS\020\001\022\016\n\nSET_ALARMS\020\002\"4\n\005Alarm\022\014\n\004time\030" +
-      "\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007enabled\030\003 \002(\010\"#\n\006" +
-      "Alarms\022\031\n\006alarms\030\001 \003(\0132\t.lm.Alarm"
+      "\022\r\n\tMENU_NEXT\020\024\022\017\n\013SWAPBUFFERS\020 \022\t\n\005PAUS" +
+      "E\020!\022\013\n\007UNPAUSE\020\"\022\t\n\005CLEAR\020$\" \n\010Position\022" +
+      "\t\n\001x\030\001 \002(\r\022\t\n\001y\030\002 \002(\r\"&\n\003RGB\022\t\n\001r\030\001 \002(\r\022" +
+      "\t\n\001g\030\002 \002(\r\022\t\n\001b\030\003 \002(\r\";\n\010SetPixel\022\031\n\003pos" +
+      "\030\001 \002(\0132\014.lm.Position\022\024\n\003rgb\030\002 \002(\0132\007.lm.R",
+      "GB\"\034\n\004Fill\022\024\n\003rgb\030\001 \002(\0132\007.lm.RGB\"4\n\nCrea" +
+      "teFont\022\n\n\002id\030\001 \002(\r\022\014\n\004size\030\002 \002(\r\022\014\n\004font" +
+      "\030\003 \002(\t\"\031\n\013DestroyFont\022\n\n\002id\030\001 \002(\r\"Z\n\013Pri" +
+      "ntString\022\031\n\003pos\030\001 \002(\0132\014.lm.Position\022\024\n\003r" +
+      "gb\030\002 \002(\0132\007.lm.RGB\022\014\n\004font\030\003 \002(\r\022\014\n\004text\030" +
+      "\004 \002(\t\"\033\n\rDestroyString\022\n\n\002id\030\001 \002(\r\"8\n\016Po" +
+      "pulateString\022\n\n\002id\030\001 \002(\r\022\014\n\004font\030\002 \002(\r\022\014" +
+      "\n\004text\030\003 \002(\t\"K\n\014RenderString\022\n\n\002id\030\001 \002(\r" +
+      "\022\031\n\003pos\030\002 \002(\0132\014.lm.Position\022\024\n\003rgb\030\003 \002(\013" +
+      "2\007.lm.RGB\"\031\n\tSetScreen\022\014\n\004name\030\001 \002(\t\"w\n\014",
+      "AlarmRequest\022#\n\004type\030\001 \002(\0162\025.lm.AlarmReq" +
+      "uest.Type\022\032\n\006alarms\030\002 \001(\0132\n.lm.Alarms\"&\n" +
+      "\004Type\022\016\n\nGET_ALARMS\020\001\022\016\n\nSET_ALARMS\020\002\"4\n" +
+      "\005Alarm\022\014\n\004time\030\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007en" +
+      "abled\030\003 \002(\010\"#\n\006Alarms\022\031\n\006alarms\030\001 \003(\0132\t." +
+      "lm.Alarm"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
