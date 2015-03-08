@@ -1,5 +1,7 @@
 package max.cube.synchronize;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class SynchronizeRunnable implements Callable<Boolean> {
                 return true;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.i("CUBE", "Failed to discover server!");
         }
 
         return false;
