@@ -26,8 +26,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.io.IOException;
 import java.net.InetAddress;
 
+import lm.Matrix;
 import max.cube.dao.AlarmDao;
 import max.cube.dao.DaoMaster;
 import max.cube.dao.DaoSession;
@@ -89,6 +91,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public Matrix newMatrix() throws IOException {
+        if (getRemoteAddress() != null) {
+            return new Matrix(getRemoteAddress(), 6969);
+        }
+
+        return null;
     }
 
     public AlarmDao getAlarmDao() {

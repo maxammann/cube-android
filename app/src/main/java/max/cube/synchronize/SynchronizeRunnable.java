@@ -36,12 +36,12 @@ public class SynchronizeRunnable implements Callable<Boolean> {
                     remoteAlarms.add(Lm.Alarm.newBuilder().setName(alarm.getName()).setEnabled(alarm.getEnabled()).setTime(alarm.getWake()).build());
                 }
 
-                matrix.setAlarms(remoteAlarms);
+                matrix.alarms(remoteAlarms);
                 matrix.close();
                 return true;
             }
         } catch (IOException e) {
-            Log.i("CUBE", "Failed to discover server!");
+            Log.i("CUBE", "Failed to synchronize!");
         }
 
         return false;

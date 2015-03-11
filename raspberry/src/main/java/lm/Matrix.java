@@ -13,6 +13,7 @@ import static lm.Lm.Position;
 import static lm.Lm.PrintString;
 import static lm.Lm.RGB;
 import static lm.Lm.Request;
+import static lm.Lm.Request.Type.*;
 import static lm.Lm.SetScreen;
 
 /**
@@ -37,26 +38,24 @@ public class Matrix {
     }
 
     public void switchScreen(String name) throws IOException {
-        Request request = Request.newBuilder().setType(Request.Type.SETSCREEN)
-                .setSetscreen(SetScreen.newBuilder().setName(name)).build();
-
-        sendRequest(request);
+        send(request(SETSCREEN)
+                .setSetscreen(SetScreen.newBuilder().setName(name)));
     }
 
     public void createFont(String font, int size) throws IOException {
-        Request request = Request.newBuilder().setType(Request.Type.CREATEFONT)
+        Request request = request(CREATEFONT)
                 .setCreatefont(CreateFont.newBuilder()
                                 .setId(0)
                                 .setFont(font)
                                 .setSize(size)
                 ).build();
 
-        sendRequest(request);
+        send(request);
     }
 
 
     public void printString(String text, int x, int y) throws IOException {
-        Request request = Request.newBuilder().setType(Request.Type.PRINTSTRING)
+        Request request = request(PRINTSTRING)
                 .setPrintstring(PrintString.newBuilder()
                                 .setRgb(RGB.newBuilder().setR(255).setG(0).setB(255))
                                 .setFont(0)
@@ -64,43 +63,54 @@ public class Matrix {
                                 .setText(text)
                 ).build();
 
-        sendRequest(request);
+        send(request);
     }
 
     public void clear() throws IOException {
-        sendRequest(Request.newBuilder().setType(Request.Type.CLEAR).build());
+        send(request(CLEAR));
     }
 
     public void swap() throws IOException {
-        sendRequest(Request.newBuilder().setType(Request.Type.SWAPBUFFERS).build());
+        send(request(SWAPBUFFERS));
     }
 
     public void unpause() throws IOException {
-        sendRequest(Request.newBuilder().setType(Request.Type.UNPAUSE).build());
+        send(request(UNPAUSE));
     }
 
     public void pause() throws IOException {
-        sendRequest(Request.newBuilder().setType(Request.Type.PAUSE).build());
+        send(request(PAUSE));
     }
 
-    public void setAlarms(Iterable<Lm.Alarm> alarms) throws IOException {
-        Request.Builder alarmRequest = Request.newBuilder().setType(Request.Type.ALARM_REQUST);
+    public void screen(String name) throws IOException {
+        send(request(SETSCREEN).setSetscreen(Lm.SetScreen.newBuilder().setName(name)));
+    }
+
+    public void alarms(Iterable<Lm.Alarm> alarms) throws IOException {
         Lm.Alarms.Builder alarmsContainer = Lm.Alarms.newBuilder();
 
         alarmsContainer.addAllAlarms(alarms);
 
-        Request.Builder setAlarms = alarmRequest.setAlarmRequest(Lm.AlarmRequest.newBuilder().setType(Lm.AlarmRequest.Type.SET_ALARMS).setAlarms(alarmsContainer));
-        sendRequest(setAlarms.build());
+        Request.Builder setAlarms = request(ALARM_REQUST)
+                .setAlarmRequest(Lm.AlarmRequest.newBuilder().setType(Lm.AlarmRequest.Type.SET_ALARMS).setAlarms(alarmsContainer));
+        send(setAlarms);
     }
 
     public void next() throws IOException {
-        sendRequest(Request.newBuilder().setType(Request.Type.MENU_NEXT).build());
+        send(request(MENU_NEXT));
     }
 
-    private void sendRequest(Request request) throws IOException {
-        byte[] bytes = request.toByteArray();
+    public Request.Builder request(Request.Type type) {
+        return Request.newBuilder().setType(type);
+    }
 
-//        os.writeInt(bytes.length);
+
+    public void send(Request.Builder request) throws IOException {
+        send(request.build());
+    }
+
+    public void send(Request request) throws IOException {
+        byte[] bytes = request.toByteArray();
 
         ByteBuffer buffer = ByteBuffer.allocate(4);
         buffer.order(ByteOrder.BIG_ENDIAN);
