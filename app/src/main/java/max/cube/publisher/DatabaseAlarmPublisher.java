@@ -2,24 +2,24 @@ package max.cube.publisher;
 
 import android.os.AsyncTask;
 
-import max.cube.MainActivity;
+import max.cube.Cube;
 import max.cube.dao.Alarm;
 import max.cube.tab.alarm.AlarmsFragment;
 
 
 public class DatabaseAlarmPublisher implements AlarmPublisher {
 
-    private final MainActivity activity;
+    private final Cube cube;
     private final AlarmsFragment fragment;
 
-    public DatabaseAlarmPublisher(MainActivity activity, AlarmsFragment fragment) {
-        this.activity = activity;
+    public DatabaseAlarmPublisher(Cube cube, AlarmsFragment fragment) {
+        this.cube = cube;
         this.fragment = fragment;
     }
 
     @Override
     public void populateView() {
-        new PopulateTask(activity, fragment).execute();
+        new PopulateTask(cube, fragment).execute();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class DatabaseAlarmPublisher implements AlarmPublisher {
 
             @Override
             protected Void doInBackground(Alarm... params) {
-                activity.getAlarmDao().insert(params[0]);
+                cube.getAlarmDao().insert(params[0]);
                 return null;
             }
         }.execute(alarm);

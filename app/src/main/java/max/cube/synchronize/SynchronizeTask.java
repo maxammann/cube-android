@@ -3,28 +3,28 @@ package max.cube.synchronize;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import max.cube.MainActivity;
+import max.cube.Cube;
 
 /**
 * Created by max on 27.02.15.
 */
 public class SynchronizeTask extends AsyncTask<Void, Void, Boolean> {
-    private MainActivity mainActivity;
+    private Cube cube;
 
-    public SynchronizeTask(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public SynchronizeTask(Cube cube) {
+        this.cube = cube;
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        new SynchronizeRunnable(mainActivity.getAlarmDao().queryBuilder().listLazy(), mainActivity.getRemoteAddress());
+        new SynchronizeRunnable(cube.getAlarmDao().queryBuilder().listLazy(), cube.getRemoteAddress());
         return true;
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         if (result) {
-            Toast.makeText(mainActivity, "Synchronized with " + mainActivity.getRemoteAddress().getHostAddress(), Toast.LENGTH_LONG).show();
+            Toast.makeText(cube, "Synchronized with " + cube.getRemoteAddress().getHostAddress(), Toast.LENGTH_LONG).show();
         }
     }
 }

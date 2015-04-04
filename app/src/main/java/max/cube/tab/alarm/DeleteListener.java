@@ -1,5 +1,6 @@
 package max.cube.tab.alarm;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -8,17 +9,20 @@ import android.widget.AdapterView;
 
 import com.cocosw.undobar.UndoBarController;
 
+import max.cube.Cube;
 import max.cube.publisher.AlarmPublisher;
-import max.cube.MainActivity;
 import max.cube.dao.Alarm;
 
 class DeleteListener implements AdapterView.OnItemLongClickListener {
-    private final AlarmPublisher populator;
-    private final MainActivity activity;
+    private final AlarmPublisher alarms;
+    private final Cube cube;
+
+    private final Activity activity;
 
 
-    public DeleteListener(AlarmPublisher populator, MainActivity activity) {
-        this.populator = populator;
+    public DeleteListener(AlarmPublisher alarms, Cube cube, Activity activity) {
+        this.alarms = alarms;
+        this.cube = cube;
         this.activity = activity;
     }
 
@@ -32,13 +36,13 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
                 @Override
                 protected Alarm doInBackground(Alarm... params) {
                     Alarm alarm = params[0];
-                    activity.getAlarmDao().delete(alarm);
+                    cube.getAlarmDao().delete(alarm);
                     return alarm;
                 }
 
                 @Override
                 protected void onPostExecute(final Alarm alarm) {
-                    populator.populateView();
+                    alarms.populateView();
 
                     String name = alarm.getName();
 
@@ -61,8 +65,8 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
         public void onUndo(@Nullable Parcelable parcelable) {
 
             if (parcelable instanceof AlarmParcelable) {
-                populator.push(((AlarmParcelable) parcelable).getAlarm());
-                populator.populateView();
+                alarms.push(((AlarmParcelable) parcelable).getAlarm());
+                alarms.populateView();
             }
         }
     }

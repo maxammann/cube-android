@@ -11,24 +11,17 @@ import max.cube.tab.alarm.AlarmsFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
-    private final MainActivity mainActivity;
-
-    public TabsPagerAdapter(FragmentManager fm, MainActivity mainActivity) {
+    public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.mainActivity = mainActivity;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                AlarmsFragment alarmsFragment = new AlarmsFragment();
-                alarmsFragment.setupPublisher(mainActivity);
-                return alarmsFragment;
+                return new AlarmsFragment();
             case 1:
-                MenuFragment main = new MenuFragment();
-                main.mainActivity = mainActivity;
-                return main;
+                return new MenuFragment();
             default:
                 Fragment fragment = new DummySectionFragment();
                 Bundle args = new Bundle();

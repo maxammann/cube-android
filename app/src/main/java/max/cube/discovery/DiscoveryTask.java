@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 import lm.discovery.Discovery;
-import max.cube.MainActivity;
+import max.cube.Cube;
 
 public class DiscoveryTask extends AsyncTask<Void, Void, InetAddress> {
 
-    private MainActivity mainActivity;
+    private Cube cube;
 
-    public DiscoveryTask(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public DiscoveryTask(Cube cube) {
+        this.cube = cube;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class DiscoveryTask extends AsyncTask<Void, Void, InetAddress> {
 
     @Override
     protected void onPostExecute(InetAddress inetAddress) {
-        mainActivity.setRemoteAddress(inetAddress);
-        Toast.makeText(mainActivity, inetAddress.getHostAddress(), Toast.LENGTH_LONG).show();
+        cube.setRemoteAddress(inetAddress);
+        Toast.makeText(cube, inetAddress.getHostAddress(), Toast.LENGTH_LONG).show();
     }
 }

@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import de.greenrobot.dao.query.LazyList;
-import max.cube.MainActivity;
+import max.cube.Cube;
 import max.cube.R;
 import max.cube.dao.Alarm;
 import max.cube.synchronize.SynchronizeRunnable;
@@ -16,18 +16,19 @@ import max.cube.tab.alarm.AlarmsLazyListAdapter;
 
 class PopulateTask extends AsyncTask<Void, Void, AlarmsLazyListAdapter> {
 
-    private final MainActivity activity;
+    private final Cube cube;
     private final AlarmsFragment fragment;
+
     private final TextView start_message;
     private final ProgressBar progress;
     private final View add_alarm;
 
-    PopulateTask(MainActivity activity, AlarmsFragment fragment) {
-        this.activity = activity;
+    PopulateTask(Cube cube, AlarmsFragment fragment) {
+        this.cube = cube;
         this.fragment = fragment;
         this.progress = (ProgressBar) fragment.getRoot().findViewById(R.id.progress);
         this.start_message = (TextView) fragment.getRoot().findViewById(R.id.start_message);
-        this.add_alarm =  fragment.getRoot().findViewById(R.id.add_alarm);
+        this.add_alarm = fragment.getRoot().findViewById(R.id.add_alarm);
     }
 
     @Override
@@ -39,11 +40,11 @@ class PopulateTask extends AsyncTask<Void, Void, AlarmsLazyListAdapter> {
 
     @Override
     protected AlarmsLazyListAdapter doInBackground(Void... params) {
-        LazyList<Alarm> query = activity.getAlarmDao().queryBuilder().listLazy();
+        LazyList<Alarm> query = cube.getAlarmDao().queryBuilder().listLazy();
 
-        new SynchronizeRunnable(query, activity.getRemoteAddress()).call();
+        new SynchronizeRunnable(query, cube.getRemoteAddress()).call();
 
-        final AlarmsLazyListAdapter adapter = new AlarmsLazyListAdapter(activity, query, activity.getAlarmDao());
+        final AlarmsLazyListAdapter adapter = new AlarmsLazyListAdapter(cube, query, cube.getAlarmDao());
         adapter.isEmpty();
 
         return adapter;

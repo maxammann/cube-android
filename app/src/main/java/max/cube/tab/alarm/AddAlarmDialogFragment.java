@@ -11,7 +11,6 @@ import java.util.Calendar;
 import max.cube.publisher.AlarmPublisher;
 import max.cube.R;
 
-
 public class AddAlarmDialogFragment extends DialogFragment {
 
     private AlarmPublisher alarmPublisher;
@@ -44,7 +43,6 @@ public class AddAlarmDialogFragment extends DialogFragment {
         );
 
         callBack.setDialogView(timePicker.getView());
-
 
         return timePicker;
     }

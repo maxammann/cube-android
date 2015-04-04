@@ -14,9 +14,11 @@ import java.util.TimeZone;
 
 import de.greenrobot.dao.GreenDaoListAdapter;
 import de.greenrobot.dao.query.LazyList;
+import max.cube.Cube;
 import max.cube.R;
 import max.cube.dao.Alarm;
 import max.cube.dao.AlarmDao;
+import max.cube.publisher.DatabaseAlarmPublisher;
 
 
 public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
@@ -61,16 +63,6 @@ public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
                 }
 
                 new UpdateTask().execute(item);
-            }
-        });
-
-        nameView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddAlarmDialogFragment addAlarm = new AddAlarmDialogFragment();
-                //todo
-//                addAlarm.alarms = AlarmsFragment.this;
-//                addAlarm.show(getActivity().getSupportFragmentManager(), "add_alarm");
             }
         });
     }

@@ -9,7 +9,6 @@ import max.cube.publisher.AlarmPublisher;
 import max.cube.R;
 import max.cube.dao.Alarm;
 
-
 public class OnTimerSetListener implements TimePickerDialog.OnTimeSetListener {
 
     private View dialogView;
