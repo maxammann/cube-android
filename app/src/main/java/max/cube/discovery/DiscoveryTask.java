@@ -30,8 +30,16 @@ public class DiscoveryTask extends AsyncTask<Void, Void, InetAddress> {
                 if (address != null) {
                     return address;
                 }
-            } catch (IOException e) {
-                Log.i("DISCOVERY", "Failed to discover server!");
+
+
+            } catch (Exception e) {
+                Log.i("DISCOVERY", "Failed to discover server!", e);
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
