@@ -32,7 +32,8 @@ public class AddAlarmDialogFragment extends DialogFragment {
 
         CustomTimePickerDialog timePicker = new CustomTimePickerDialog(
                 getActivity(),
-                R.style.TimePickerTheme,
+//                R.style.TimePickerTheme,
+                0,
                 callBack,
                 R.layout.custom_picker_dialog,
                 R.id.timePicker,

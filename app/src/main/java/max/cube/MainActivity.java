@@ -2,25 +2,17 @@ package max.cube;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import java.io.IOException;
-import java.net.InetAddress;
-
-import lm.Matrix;
-import max.cube.dao.AlarmDao;
-import max.cube.dao.DaoMaster;
-import max.cube.dao.DaoSession;
-import max.cube.discovery.DiscoveryTask;
 import max.cube.synchronize.SynchronizeTask;
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
 
     private ViewPager mViewPager;
 

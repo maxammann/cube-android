@@ -42,9 +42,9 @@ class PopulateTask extends AsyncTask<Void, Void, AlarmsLazyListAdapter> {
     protected AlarmsLazyListAdapter doInBackground(Void... params) {
         LazyList<Alarm> query = cube.getAlarmDao().queryBuilder().listLazy();
 
-        new SynchronizeRunnable(query, cube.getRemoteAddress()).call();
+        new SynchronizeRunnable(query, cube.getRemoteHost(), cube.getRemotePort()).call();
 
-        final AlarmsLazyListAdapter adapter = new AlarmsLazyListAdapter(cube, query, cube.getAlarmDao());
+        final AlarmsLazyListAdapter adapter = new AlarmsLazyListAdapter(cube, query, cube, cube.getAlarmDao());
         adapter.isEmpty();
 
         return adapter;

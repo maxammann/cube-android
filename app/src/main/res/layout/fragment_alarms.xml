@@ -15,8 +15,7 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -36,17 +35,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
-
-    <com.getbase.floatingactionbutton.AddFloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        fab:fab_colorNormal="@android:color/white"
-        fab:fab_colorPressed="#f1f1f1"
-        fab:fab_plusIconColor="#808080" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_anchorGravity="bottom|end" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -55,5 +51,5 @@
         android:layout_height="80dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </FrameLayout>

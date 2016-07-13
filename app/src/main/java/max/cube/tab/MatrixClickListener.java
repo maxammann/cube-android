@@ -5,7 +5,7 @@ import android.view.View;
 
 import java.io.IOException;
 
-import lm.Matrix;
+import max.cube.Matrix;
 import max.cube.Cube;
 
 
@@ -25,7 +25,6 @@ public abstract class MatrixClickListener implements View.OnClickListener{
                 try {
                     Matrix matrix = cube.newMatrix();
                     onClick(v, matrix);
-                    matrix.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

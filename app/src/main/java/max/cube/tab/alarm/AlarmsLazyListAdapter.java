@@ -18,15 +18,19 @@ import max.cube.Cube;
 import max.cube.R;
 import max.cube.dao.Alarm;
 import max.cube.dao.AlarmDao;
+import max.cube.publisher.AlarmPublisher;
 import max.cube.publisher.DatabaseAlarmPublisher;
+import max.cube.synchronize.SynchronizeRunnable;
 
 
 public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
 
+    private final Cube cube;
     private final AlarmDao alarmDao;
 
-    public AlarmsLazyListAdapter(Context context, LazyList<Alarm> lazyList, AlarmDao alarmDao) {
+    public AlarmsLazyListAdapter(Context context, LazyList<Alarm> lazyList, Cube cube, AlarmDao alarmDao) {
         super(context, lazyList);
+        this.cube = cube;
         this.alarmDao = alarmDao;
     }
 
@@ -63,6 +67,7 @@ public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
                 }
 
                 new UpdateTask().execute(item);
+
             }
         });
     }
@@ -71,6 +76,8 @@ public class AlarmsLazyListAdapter extends GreenDaoListAdapter<Alarm> {
         @Override
         protected Void doInBackground(Alarm... params) {
             alarmDao.update(params[0]);
+
+            new SynchronizeRunnable(alarmDao.queryBuilder().listLazy(), cube.getRemoteHost(), cube.getRemotePort()).call();
             return null;
         }
     }

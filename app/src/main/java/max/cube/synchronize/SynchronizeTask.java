@@ -17,14 +17,14 @@ public class SynchronizeTask extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... params) {
-        new SynchronizeRunnable(cube.getAlarmDao().queryBuilder().listLazy(), cube.getRemoteAddress());
+        new SynchronizeRunnable(cube.getAlarmDao().queryBuilder().listLazy(), cube.getRemoteHost(), cube.getRemotePort()).call();
         return true;
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         if (result) {
-            Toast.makeText(cube, "Synchronized with " + cube.getRemoteAddress().getHostAddress(), Toast.LENGTH_LONG).show();
+            Toast.makeText(cube, "Synchronized with " + cube.getRemoteHost(), Toast.LENGTH_LONG).show();
         }
     }
 }

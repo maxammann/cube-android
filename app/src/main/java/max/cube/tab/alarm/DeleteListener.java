@@ -2,12 +2,9 @@ package max.cube.tab.alarm;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.AdapterView;
-
-import com.cocosw.undobar.UndoBarController;
 
 import max.cube.Cube;
 import max.cube.publisher.AlarmPublisher;
@@ -27,7 +24,7 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+    public boolean onItemLongClick(final AdapterView<?> parent, View view, int position, long id) {
         Object tag = view.getTag();
 
         if (tag instanceof Alarm) {
@@ -46,9 +43,11 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
 
                     String name = alarm.getName();
 
-                    new UndoBarController.UndoBar(activity).token(new AlarmParcelable(alarm))
-                            .message((name == null || name.isEmpty() ? "Alarm" : name) + " deleted").listener(new UndoListener())
-                            .show();
+                    String message = (name == null || name.isEmpty() ? "Alarm" : name) + " deleted";
+                    Snackbar snackbar = Snackbar
+                            .make(parent, message, Snackbar.LENGTH_LONG)
+                            .setAction("Undo", new UndoListener(alarm));
+                    snackbar.show();
                 }
             };
 
@@ -60,14 +59,17 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
         return false;
     }
 
-    private class UndoListener implements UndoBarController.UndoListener {
-        @Override
-        public void onUndo(@Nullable Parcelable parcelable) {
+    private class UndoListener implements View.OnClickListener {
+        private final Alarm alarm;
 
-            if (parcelable instanceof AlarmParcelable) {
-                alarms.push(((AlarmParcelable) parcelable).getAlarm());
-                alarms.populateView();
-            }
+        private UndoListener(Alarm alarm) {
+            this.alarm = alarm;
+        }
+
+        @Override
+        public void onClick(View v) {
+            alarms.push(alarm);
+            alarms.populateView();
         }
     }
 }

@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <!--<item name="colorPrimary">@color/primary</item>-->
+        <!--<item name="colorPrimaryDark">@color/primary_dark</item>-->
+        <!--<item name="colorAccent">@color/accent</item>-->
+    </style>
 
+
+    <!--<style name="TimeLabelTextAppearance" parent="@android:style/TextAppearance">-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+        <!--<item name="android:textSize">60sp</item>-->
+    <!--</style>-->
+
+    <!--<style name="AmPmTextAppearance" parent="@android:style/TextAppearance">-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+        <!--<item name="android:textSize">16sp</item>-->
+    <!--</style>-->
+
+    <!--<style name="TimePickerStyle" parent="@android:style/Widget.TimePicker">-->
+        <!--<item name="android:headerBackground">@color/time_picker_gray</item>-->
+        <!--&lt;!&ndash;<item name="android:headerTimeTextAppearance">@style/TimeLabelTextAppearance</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:headerAmPmTextAppearance">@style/AmPmTextAppearance</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:numbersBackgroundColor">@color/time_picker_gray</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:numbersTextColor">@android:color/white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:amPmTextColor">@android:color/white</item>&ndash;&gt;-->
+    <!--</style>-->
+
+    <!--<style name="TimePickerTheme" parent="@android:style/Theme.Dialog">-->
+        <!--<item name="android:background">@color/time_picker_gray</item>-->
+        <!--&lt;!&ndash;<item name="android:timePickerStyle">@style/TimePickerStyle</item>&ndash;&gt;-->
+        <!--<item name="android:textColorPrimaryInverse">@color/hot_pink</item>-->
+        <!--&lt;!&ndash;<item name="android:colorAccent">@color/hot_pink</item>&ndash;&gt;-->
+    <!--</style>-->
 </resources>
