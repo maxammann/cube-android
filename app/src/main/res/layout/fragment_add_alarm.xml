@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="max.cube.tab.alarm.AddAlarmDialogFragment">
+    tools:context=".alarm.AddAlarmDialogFragment">
 
     <TextView
         android:id="@+id/textView"

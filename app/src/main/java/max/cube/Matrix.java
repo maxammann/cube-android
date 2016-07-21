@@ -1,17 +1,23 @@
 package max.cube;
 
+import android.util.JsonReader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import max.cube.dao.Alarm;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Represents a Matrix
@@ -20,6 +26,7 @@ public class Matrix {
 
     private String host;
     private int port;
+    public static final OkHttpClient CLIENT = new OkHttpClient();
 
     public Matrix(String host, int port) {
         this.host = host;
@@ -28,7 +35,7 @@ public class Matrix {
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public void setAlarms(Iterable<Alarm> alarms) throws IOException {
+    public void sendAlarms(List<Alarm> alarms) throws IOException {
         JSONArray json = new JSONArray();
 
         for (Alarm alarm : alarms) {
@@ -36,14 +43,12 @@ public class Matrix {
             try {
                 alarmObject.put("name", alarm.getName());
                 alarmObject.put("wake_time", alarm.getWake());
-                alarmObject.put("enabled", alarm.getEnabled());
+                alarmObject.put("enabled", alarm.isEnabled());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             json.put(alarmObject);
         }
-
-        OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .url(new URL("http", host, port, "alarm/set"))
@@ -51,6 +56,51 @@ public class Matrix {
                 .build();
 
 
-        client.newCall(request).execute();
+        CLIENT.newCall(request).execute();
+    }
+
+    public List<Alarm> receiveAlarms() throws IOException {
+        Request request = new Request.Builder()
+                .url(new URL("http", host, port, "alarm/get"))
+                .get()
+                .build();
+
+
+        Response response = CLIENT.newCall(request).execute();
+
+        ArrayList<Alarm> alarms = new ArrayList<>();
+
+        JsonReader jsonReader = new JsonReader(response.body().charStream());
+
+        jsonReader.beginArray();
+        while (jsonReader.hasNext()) {
+            jsonReader.beginObject();
+            String name = "None";
+            long wakeTime = -1;
+            boolean enabled = false;
+
+            while (jsonReader.hasNext()) {
+                String key = jsonReader.nextName();
+
+                switch (key) {
+                    case "name":
+                        name = jsonReader.nextString();
+                        break;
+                    case "wake_time":
+                        wakeTime = jsonReader.nextLong();
+                        break;
+                    case "enabled":
+                        enabled = jsonReader.nextBoolean();
+                        break;
+                }
+            }
+
+            alarms.add(new Alarm(name, wakeTime, enabled));
+            jsonReader.endObject();
+        }
+        jsonReader.endArray();
+
+        jsonReader.close();
+        return alarms;
     }
 }

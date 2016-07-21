@@ -1,4 +1,4 @@
-package max.cube.tab.alarm;
+package max.cube.alarm;
 
 import android.app.Dialog;
 import android.os.Bundle;

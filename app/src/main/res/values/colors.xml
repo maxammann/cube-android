@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="hot_pink">#FF4081</color>
-    <color name="time_picker_gray">#212121</color>
 
-    <color name="background_blue">#ff2c36ff</color>
     <color name="primary_font_color">#ffffffff</color>
 
 </resources>

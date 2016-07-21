@@ -1,19 +1,14 @@
-package max.cube.tab.alarm;
+package max.cube.alarm;
 
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import max.cube.Cube;
-import max.cube.publisher.AlarmPublisher;
-import max.cube.MainActivity;
 import max.cube.R;
-import max.cube.publisher.DatabaseAlarmPublisher;
+import max.cube.publisher.MatrixAlarmPublisher;
 
 
 public class AlarmsFragment extends Fragment {
@@ -24,12 +19,14 @@ public class AlarmsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        Cube cube = (Cube) getActivity().getApplication();
-        final AlarmPublisher alarmPublisher = new DatabaseAlarmPublisher(cube, this);
-
         root = (ViewGroup) inflater.inflate(R.layout.fragment_alarms, container, false);
         list = (ListView) root.findViewById(R.id.alarm_list);
+
+        setRetainInstance(true);
+
+        final MatrixAlarmPublisher alarmPublisher = new MatrixAlarmPublisher(getContext(), this);
+
+        list.setAdapter(alarmPublisher.getAlarmListAdapter());
 
 
         root.findViewById(R.id.add_alarm).setOnClickListener(new View.OnClickListener() {
@@ -42,7 +39,7 @@ public class AlarmsFragment extends Fragment {
             }
         });
 
-        list.setOnItemLongClickListener(new DeleteListener(alarmPublisher, cube, getActivity()));
+        list.setOnItemLongClickListener(new DeleteListener(alarmPublisher));
 
 
         alarmPublisher.populateView();
