@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -14,6 +16,7 @@ import java.util.TimeZone;
 
 import max.cube.Alarm;
 import max.cube.R;
+import max.cube.Weekday;
 import max.cube.publisher.AlarmPublisher;
 
 
@@ -40,7 +43,9 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
 
     public View newView(Alarm item, ViewGroup parent) {
-        return LayoutInflater.from(getContext()).inflate(R.layout.alarm_item, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.alarm_item, parent, false);
+        view.setTag(item);
+        return view;
     }
 
     public void bindView(View view, final Alarm item) {
@@ -70,6 +75,34 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
                 }
 
                 alarmPublisher.update(item);
+            }
+        });
+
+
+
+        setupWeekdayButton(view, R.id.monday, Weekday.MONDAY, item);
+        setupWeekdayButton(view, R.id.tuesday, Weekday.TUESDAY, item);
+        setupWeekdayButton(view, R.id.wednesday, Weekday.WEDNESDAY, item);
+        setupWeekdayButton(view, R.id.thursday, Weekday.THURSDAY, item);
+        setupWeekdayButton(view, R.id.friday, Weekday.FRIDAY, item);
+        setupWeekdayButton(view, R.id.saturday, Weekday.SATURDAY, item);
+        setupWeekdayButton(view, R.id.sunday, Weekday.SUNDAY, item);
+    }
+
+    private void setupWeekdayButton(View view, int id, final Weekday weekday, final Alarm alarm) {
+        ToggleButton button = ((ToggleButton) view.findViewById(id));
+        button.setChecked(alarm.isWeekday(weekday.getOrdinal()));
+
+        button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    alarm.setWeekday(weekday.getOrdinal(), true);
+                } else {
+                    alarm.setWeekday(weekday.getOrdinal(), false);
+                }
+
+                alarmPublisher.update(alarm);
             }
         });
     }

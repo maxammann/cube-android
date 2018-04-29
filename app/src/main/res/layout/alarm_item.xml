@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:minHeight="100dp">
-
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/top"
-        android:text="Name"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/primary_font_color" />
-
+    android:minHeight="100dp"
+    android:orientation="vertical"
+    android:longClickable="true">
 
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:longClickable="true">
 
         <TextView
             android:id="@+id/time"
@@ -38,8 +28,102 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:enabled="true"
             android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:enabled="true"/>
+            android:focusableInTouchMode="false" />
     </RelativeLayout>
-</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:longClickable="true">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="1dp"
+            android:paddingTop="1dp"
+            android:text="Name"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/primary_font_color" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/monday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="M"
+                android:textOn="M" />
+
+            <ToggleButton
+                android:id="@+id/tuesday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="T"
+                android:textOn="T" />
+
+            <ToggleButton
+                android:id="@+id/wednesday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="W"
+                android:textOn="W" />
+
+            <ToggleButton
+                android:id="@+id/thursday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="T"
+                android:textOn="T" />
+
+            <ToggleButton
+                android:id="@+id/friday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="F"
+                android:textOn="F" />
+
+            <ToggleButton
+                android:id="@+id/saturday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="S"
+                android:textOn="S" />
+
+            <ToggleButton
+                android:id="@+id/sunday"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/weekday_button_shape"
+                android:textOff="S"
+                android:textOn="S" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

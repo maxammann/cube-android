@@ -17,9 +17,7 @@ import max.cube.R;
 import max.cube.alarm.AlarmListAdapter;
 import max.cube.alarm.AlarmsFragment;
 
-abstract class MatrixTask extends AsyncTask<Void, Void, Void> {
-
-
+abstract class MatrixTask<T> extends AsyncTask<Void, Void, Void> {
 
     private final TextView start_message;
     private final ProgressBar progress;
@@ -27,6 +25,8 @@ abstract class MatrixTask extends AsyncTask<Void, Void, Void> {
     private final String host;
     private final int port;
     private final AlarmListAdapter alarmListAdapter;
+
+    private T result = null;
 
     MatrixTask(String host, int port, AlarmsFragment fragment, AlarmListAdapter alarmListAdapter) {
         this.host = host;
@@ -44,9 +44,9 @@ abstract class MatrixTask extends AsyncTask<Void, Void, Void> {
         add_alarm.setVisibility(View.GONE);
     }
 
-    protected abstract void operate(List<Alarm> alarms, Matrix matrix) throws IOException;
+    protected abstract T operate(List<Alarm> alarms, Matrix matrix) throws IOException;
 
-    protected abstract void post();
+    protected abstract void post(T result);
 
 
     @Override
@@ -58,7 +58,7 @@ abstract class MatrixTask extends AsyncTask<Void, Void, Void> {
 
         try {
             Matrix matrix = new Matrix(host, port);
-            operate(Collections.unmodifiableList(alarms), matrix);
+            result = operate(Collections.unmodifiableList(alarms), matrix);
         } catch (IOException e) {
             Log.e("CUBE", "Failed to synchronize!", e);
         }
@@ -68,11 +68,11 @@ abstract class MatrixTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void parm) {
+        post(result);
+
         start_message.setVisibility(!alarmListAdapter.isEmpty() ? View.GONE : View.VISIBLE);
 
         progress.setVisibility(View.GONE);
         add_alarm.setVisibility(View.VISIBLE);
-
-        post();
     }
 }

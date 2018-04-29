@@ -32,8 +32,7 @@ public class OnTimerSetListener implements TimePickerDialog.OnTimeSetListener {
         EditText nameView = (EditText) dialogView.findViewById(R.id.alarm_name);
         String name = nameView.getText().toString();
 
-        alarms.push(new Alarm(name,minute * 60 + hourOfDay * 60 * 60, true ));
-        alarms.populateView();
+        alarms.push(new Alarm(name,minute * 60 + hourOfDay * 60 * 60, true, new boolean[7]));
     }
 
     public void setDialogView(View dialogView) {

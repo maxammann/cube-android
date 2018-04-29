@@ -6,11 +6,13 @@ public class Alarm {
     private String name;
     private long wake;
     private boolean enabled;
+    private boolean[] weekdays;
 
-    public Alarm(String name, long wake, boolean enabled) {
+    public Alarm(String name, long wake, boolean enabled, boolean[] weekdays) {
         this.name = name;
         this.wake = wake;
         this.enabled = enabled;
+        this.weekdays = weekdays;
     }
 
     public String getName() {
@@ -45,4 +47,14 @@ public class Alarm {
                 ", enabled=" + enabled +
                 '}';
     }
+
+    public boolean isWeekday(int ordinal) {
+        return weekdays[ordinal];
+    }
+
+    public void setWeekday(int ordinal, boolean enabled) {
+
+        weekdays[ordinal] = enabled;
+    }
+
 }

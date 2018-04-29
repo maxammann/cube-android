@@ -3,8 +3,10 @@ package max.cube.alarm;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 
 import max.cube.Alarm;
+import max.cube.R;
 import max.cube.publisher.AlarmPublisher;
 
 class DeleteListener implements AdapterView.OnItemLongClickListener {
@@ -16,7 +18,7 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
 
     @Override
     public boolean onItemLongClick(final AdapterView<?> parent, View view, int position, long id) {
-        Object tag = view.getTag();
+        Object tag = parent.getChildAt(position).getTag();
 
         if (tag instanceof Alarm) {
             Alarm alarm = ((Alarm) tag);
@@ -27,7 +29,7 @@ class DeleteListener implements AdapterView.OnItemLongClickListener {
 
             String message = (name == null || name.isEmpty() ? "Alarm" : name) + " deleted";
             Snackbar snackbar = Snackbar
-                    .make(parent, message, Snackbar.LENGTH_LONG)
+                    .make(((FrameLayout) parent.getParent()).findViewById(R.id.add_alarm), message, Snackbar.LENGTH_LONG)
                     .setAction("Undo", new UndoListener(alarm));
             snackbar.show();
 

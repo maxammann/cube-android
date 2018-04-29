@@ -2,6 +2,6 @@
 <resources>
 
     <integer name="port">8081</integer>
-    <string name="host">max-clock</string>
+    <string name="host">alarm-clock</string>
 
 </resources>

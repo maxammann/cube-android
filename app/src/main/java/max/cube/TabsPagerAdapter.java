@@ -17,14 +17,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return new AlarmsFragment();
-//            case 1:
-//                return new MenuFragment();
-//            default:
-//                Fragment fragment = new DummySectionFragment();
-//                Bundle args = new Bundle();
-//                args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-//                fragment.setArguments(args);
-//                return fragment;
         }
 
         return null;
@@ -40,10 +32,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return "Alarms";
-            case 1:
-                return "Menu";
             default:
-                return "Dummy";
+                return "None";
         }
     }
 }

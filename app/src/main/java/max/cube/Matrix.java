@@ -7,10 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -26,14 +24,14 @@ public class Matrix {
 
     private String host;
     private int port;
-    public static final OkHttpClient CLIENT = new OkHttpClient();
+    private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public Matrix(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public void sendAlarms(List<Alarm> alarms) throws IOException {
         JSONArray json = new JSONArray();
@@ -44,6 +42,14 @@ public class Matrix {
                 alarmObject.put("name", alarm.getName());
                 alarmObject.put("wake_time", alarm.getWake());
                 alarmObject.put("enabled", alarm.isEnabled());
+
+                JSONArray weekdays = new JSONArray();
+
+                for (int i = 0; i < 7; i++) {
+                    weekdays.put(alarm.isWeekday(i));
+                }
+
+                alarmObject.put("weekdays", weekdays);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -78,6 +84,7 @@ public class Matrix {
             String name = "None";
             long wakeTime = -1;
             boolean enabled = false;
+            boolean[] weekdays = new boolean[7];
 
             while (jsonReader.hasNext()) {
                 String key = jsonReader.nextName();
@@ -92,10 +99,19 @@ public class Matrix {
                     case "enabled":
                         enabled = jsonReader.nextBoolean();
                         break;
+                    case "weekdays":
+                        int i = 0;
+                        jsonReader.beginArray();
+                        while (jsonReader.hasNext()) {
+                            weekdays[i] = jsonReader.nextBoolean();
+                            i++;
+                        }
+                        jsonReader.endArray();
+                        break;
                 }
             }
 
-            alarms.add(new Alarm(name, wakeTime, enabled));
+            alarms.add(new Alarm(name, wakeTime, enabled, weekdays));
             jsonReader.endObject();
         }
         jsonReader.endArray();
